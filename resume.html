@@ -43,7 +43,7 @@
 
     /* TOOLBAR */
     .toolbar {
-      max-width: 880px; margin: 30px auto 0; padding: 0 24px;
+      max-width: 880px; margin: 16px auto 0; padding: 0 24px;
       display: flex; justify-content: flex-end; gap: 10px;
     }
     .tool-btn {
@@ -57,15 +57,16 @@
 
     /* RESUME SHEET */
     .resume {
-      max-width: 880px; margin: 18px auto 80px;
+      max-width: 880px; margin: 12px auto 60px;
       background: #fff; border-radius: 16px;
       box-shadow: 0 18px 50px rgba(0,0,0,0.10);
-      padding: 56px 60px;
+      padding: 32px 60px 48px;
     }
     .resume-head {
       border-bottom: 2px solid var(--blue); padding-bottom: 18px; margin-bottom: 24px;
-      display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+      text-align: center;
     }
+    .resume-head .contact-row { justify-content: center; }
     .resume-head-text { min-width: 0; }
     .resume-photo {
       width: 110px; height: 110px; border-radius: 50%;
@@ -143,7 +144,7 @@
     }
 
     /* PRINT (Save as PDF) */
-    @page { size: A4; margin: 12mm 12mm; }
+    @page { size: A4; margin: 8mm 12mm; }
     @media print {
       body { background: #fff; }
       .navbar, .footer, .toolbar, .print-tip { display: none !important; }
@@ -151,8 +152,18 @@
         box-shadow: none; margin: 0; padding: 0;
         max-width: 100%; border-radius: 0;
       }
+      .resume-head { padding-bottom: 10px !important; margin-bottom: 14px !important; }
       a { color: var(--text) !important; }
-      .section { page-break-inside: avoid; }
+      /* Force desktop layout in print */
+      .resume-head { text-align: center !important; }
+      .resume-head .contact-row { justify-content: center !important; }
+      .resume-head h1 { font-size: 2rem !important; }
+      .skills-grid { grid-template-columns: 160px 1fr !important; gap: 6px 18px !important; }
+      .skills-grid dt { margin-top: 0 !important; }
+      .section { margin-top: 14px !important; page-break-inside: auto; }
+      .proj-item { page-break-inside: avoid; }
+      .summary { font-size: 0.88rem !important; }
+      .row-desc { font-size: 0.84rem !important; }
     }
 
     /* PRINT TIP banner */
@@ -162,6 +173,48 @@
       font-size: 0.8rem; color: #6b5400;
     }
     .print-tip b { color: #4a3a00; }
+
+    /* INTERMEDIATE RESPONSIVE */
+    @media (max-width: 1200px) {
+      .navbar { padding: 20px 40px; }
+      .footer { padding: 28px 40px; }
+      .page-header h1 { font-size: 2.7rem; }
+      .skills-wrap { padding: 20px 40px 70px; }
+      .cert-wrap { padding: 20px 40px 70px; gap: 22px; }
+      .projects-wrap { padding: 20px 40px 70px; gap: 50px; }
+    }
+    @media (max-width: 1024px) {
+      .navbar { padding: 18px 30px; }
+      .footer { padding: 24px 30px; }
+      .page-header h1 { font-size: 2.4rem; }
+      .page-header { padding: 56px 20px 24px; }
+      .cert-wrap { grid-template-columns: repeat(2, 1fr); }
+      .projects-wrap { gap: 40px; }
+      .project, .project.reverse, .project.portrait { grid-template-columns: 1fr !important; }
+      .project.reverse .project-info { order: 1; }
+      .project.reverse .project-gallery { order: 2; }
+      .project-info { padding: 36px 28px; }
+      .project-title { font-size: 1.6rem; }
+      .main-img-wrap { min-height: 280px; aspect-ratio: 16/10; }
+      .project.portrait .main-img-wrap { aspect-ratio: 9/16; max-height: 520px; }
+      .resume { padding: 40px 32px; margin: 14px 20px 60px; }
+      .resume-head { grid-template-columns: 1fr; text-align: left; }
+      .resume-photo { width: 96px; height: 96px; }
+    }
+    @media (max-width: 720px) {
+      .navbar { padding: 16px 20px; }
+      .footer { padding: 22px 20px; flex-direction: column; align-items: flex-start; }
+      .page-header h1 { font-size: 2rem; }
+      .skills-wrap, .cert-wrap, .projects-wrap { padding: 16px 20px 60px; }
+      .cert-wrap { grid-template-columns: 1fr; }
+      .resume { padding: 28px 22px; margin: 12px 14px 50px; }
+      .resume-head h1 { font-size: 1.6rem; }
+      .contact-row { gap: 8px 14px; font-size: 0.78rem; }
+      .project-info { padding: 28px 22px; }
+      .project-title { font-size: 1.4rem; }
+      .tech-row { font-size: 0.78rem; }
+      .tech-label { min-width: 90px; }
+    }
   </style>
 </head>
 <body>
@@ -204,35 +257,33 @@
           <span><i class="fa-solid fa-globe"></i><a href="https://sanjay-katta-portfolio.vercel.app/" target="_blank" rel="noopener">sanjay-katta-portfolio.vercel.app</a></span>
         </div>
       </div>
-      <div class="resume-photo">
-        <img src="Images/About_Me_At_Mall_1.jpeg" alt="Sanjay Katta">
-      </div>
     </header>
 
     <section class="section">
       <h2>Summary</h2>
-      <p class="summary">B.Tech Data Science student passionate about building practical, user-facing software — from full-stack web apps to AI-powered mobile experiences and BI dashboards. Comfortable across the stack with Python/FastAPI on the backend, React &amp; React Native on the frontend, and SQL/Supabase for data. Quick learner who enjoys turning real problems into clean, working products.</p>
+      <p class="summary">B.Tech Data Science student passionate about building practical, user-facing software — from full-stack web apps to AI-powered mobile experiences and BI dashboards. Comfortable across the stack with Python/FastAPI on the backend, HTML/CSS/JavaScript on the frontend, and SQL/Supabase for data. Quick learner who enjoys turning real problems into clean, working products.</p>
     </section>
 
     <section class="section">
       <h2>Education</h2>
       <div class="edu-item">
         <div class="row-head">
-          <span class="row-title">B.Tech, Data Science</span>
+          <span class="row-title">Aditya University, Surampalem, India</span>
           <span class="row-meta">2024 – 2028</span>
         </div>
-        <div class="row-sub">Aditya University</div>
+        <div class="row-sub">B.Tech in Computer Science and Engineering (Data Science) — Undergraduate </div>
       </div>
     </section>
 
     <section class="section">
       <h2>Technical Skills</h2>
       <dl class="skills-grid">
+        <dt>Programming Languages</dt><dd>C, C++, Python</dd>
         <dt>Frontend</dt><dd>HTML, CSS, JavaScript</dd>
         <dt>Backend</dt><dd>Python, FastAPI, REST APIs, SQLAlchemy</dd>
-        <dt>Databases</dt><dd>MySQL, SQL, Supabase</dd>
+        <dt>Databases</dt><dd>MySQL, Supabase</dd>
         <dt>Data &amp; BI</dt><dd>Power BI, DAX, Excel, Data Visualization</dd>
-        <dt>Tools &amp; Cloud</dt><dd>Git, GitHub, VS Code, Expo, Vercel, Render</dd>
+        <dt>Tools &amp; Cloud</dt><dd>Git, GitHub, VS Code, Expo, Vercel, Render, Google Colab</dd>
         <dt>Soft Skills</dt><dd>Problem Solving, Communication, Team Work, Quick Learning, Presentation</dd>
       </dl>
     </section>
@@ -246,7 +297,7 @@
           <span class="row-meta">Link : <a href="https://github.com/Sanjaysanjay31/WorkMithra_Project" target="_blank" rel="noopener">github.com/Sanjaysanjay31/WorkMithra_Project</a></span>
         </div>
         <p class="row-desc">A multilingual mobile app that connects everyday clients with nearby skilled workers using voice commands. Integrated speech-to-text, text-to-speech, and translation to make the booking flow accessible for first-time smartphone users, with map-based discovery and LLM-driven intent detection.</p>
-        <div class="tech-inline"><strong>Stack:</strong> React Native, Expo, FastAPI, Render, Supabase, SQLAlchemy, Sarvam AI, OpenStreetMap, Llama 3.1 8B Instruct</div>
+        <div class="tech-inline"><strong>Stack:</strong> Expo, FastAPI, Render, Supabase, SQLAlchemy, Sarvam AI, OpenStreetMap, Llama 3.1 8B Instruct</div>
       </div>
 
       <div class="proj-item">
@@ -279,6 +330,7 @@
       </ul>
     </section>
 
+
   </main>
 
   <footer class="footer"><div class="footer-block">
@@ -295,7 +347,6 @@
         <a href="https://github.com/Sanjaysanjay31" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
         <a href="https://www.linkedin.com/in/sanjay-katta-ba1456323/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
         <a href="mailto:kattasanjay31@gmail.com"><i class="fa-solid fa-envelope"></i></a>
-        <a href="https://www.instagram.com/sanjay_31_06_" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
       </div>
     </div>
   </footer>
