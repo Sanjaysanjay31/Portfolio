@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certifications — Sanjay Katta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #5072ed;
+      --accent: #0ea5a4;
+      --text: #1c1c1c;
+      --muted: #5a5a5a;
+      --beige: #f1e2d0;
+      --card: #f3ddc5;
+      --soft: #d5f9cbd8;
+      --line: #ecdf9c;
+      --bg: #dbe4f8ff;
+    }
+    html, body {
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text); background: var(--bg);
+      scroll-behavior: smooth; -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 60px; background: #fff; border-bottom: 1px solid #eee;
+    }
+    .nav-left { display: flex; align-items: center; gap: 12px; }
+    .logo-square { color: var(--accent); font-size: 1.2rem; display: inline-flex; align-items: center; flex-shrink: 0; }
+    .logo-name { font-weight: 800; font-size: 1.05rem; }
+    .nav-right { display: flex; gap: 32px; }
+    .nav-link { font-size: 0.82rem; letter-spacing: 1.2px; font-weight: 600; color: var(--text); transition: color .2s; }
+    .nav-link:hover, .nav-link.active { color: var(--blue); }
+    .nav-toggle { display: none; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text); }
+
+    /* HEADER */
+    .page-header {
+      text-align: center; padding: 70px 24px 30px;
+      max-width: 760px; margin: 0 auto;
+    }
+    .page-header h1 {
+      font-size: 3.2rem; font-weight: 800; letter-spacing: -2px; line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .page-header h1 span { color: var(--blue); }
+    .page-header p { color: var(--muted); font-size: 1rem; line-height: 1.6; }
+
+    /* CERT GRID */
+    .cert-wrap {
+      max-width: 1240px; margin: 0 auto; padding: 20px 60px 90px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px;
+    }
+    .cert-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px; overflow: hidden;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.04);
+      transition: transform .3s ease, box-shadow .3s ease;
+      display: flex; flex-direction: column;
+    }
+    .cert-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.10);
+    }
+    .cert-thumb {
+      position: relative; aspect-ratio: 4/3; overflow: hidden;
+      background: var(--bg); cursor: zoom-in;
+    }
+    .cert-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .4s ease;
+    }
+    .cert-card:hover .cert-thumb img { transform: scale(1.05); }
+    .cert-thumb::after {
+      content: '\f00e'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+      position: absolute; top: 12px; right: 12px;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(255,255,255,0.92); color: var(--blue);
+      display: grid; place-items: center; font-size: 0.85rem;
+      opacity: 0; transition: opacity .25s ease;
+    }
+    .cert-card:hover .cert-thumb::after { opacity: 1; }
+    .cert-body { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1; background: var(--soft); border-top: 1px solid var(--line); }
+    .cert-actions { margin-top: auto !important; }
+    .cert-provider {
+      font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--muted); font-weight: 700;
+    }
+    .cert-title { font-size: 1.05rem; font-weight: 700; line-height: 1.3; }
+    .cert-meta {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.78rem; color: var(--muted); margin-top: 4px;
+    }
+    .cert-meta i { color: var(--blue); }
+    .cert-id {
+      font-size: 0.72rem; color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      word-break: break-all;
+    }
+    .cert-actions { margin-top: 12px; display: flex; gap: 8px; }
+    .cert-btn {
+      flex: 1; padding: 9px 12px; border-radius: 10px;
+      font-size: 0.78rem; font-weight: 600; text-align: center;
+      border: 1px solid var(--line); background: #fff; color: var(--text);
+      transition: all .2s ease; cursor: pointer;
+    }
+    .cert-btn.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .cert-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(0,0,0,0.10); }
+
+    /* MODAL */
+    .modal {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+      display: none; align-items: center; justify-content: center;
+      z-index: 1000; padding: 30px;
+    }
+    .modal.open { display: flex; }
+    .modal img { max-width: 100%; max-height: 90vh; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .modal-close {
+      position: absolute; top: 20px; right: 24px;
+      background: #fff; border: none; width: 42px; height: 42px;
+      border-radius: 50%; font-size: 1.1rem; cursor: pointer;
+      display: grid; place-items: center;
+    }
+
+    /* FOOTER */
+    .footer {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 30px 60px; background: #fff; border-top: 1px solid #eee;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-left p { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+    .footer-block { text-align: center; }
+    .footer-label { font-size: 0.78rem; font-weight: 700; margin-bottom: 6px; }
+    .footer-block a { font-size: 0.85rem; color: var(--text); }
+    .footer-block a:hover { color: var(--blue); }
+    .footer-icons { display: flex; gap: 20px; justify-content: center; margin-top: 8px; }
+    .footer-icons a { font-size: 1.6rem; transition: color .2s ease, transform .2s ease; } .footer-icons a:hover { color: var(--blue); transform: translateY(-2px); }
+
+    @media (max-width: 1024px) {
+      .cert-wrap { grid-template-columns: repeat(2, 1fr); padding: 20px 32px 70px; }
+    }
+    @media (max-width: 900px) {
+      .navbar { padding: 18px 24px; }
+      .nav-right {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: #fff; flex-direction: column; gap: 0;
+        padding: 12px 0; border-bottom: 1px solid #eee;
+      }
+      .nav-right.open { display: flex; }
+      .nav-right .nav-link { padding: 14px 24px; }
+      .nav-toggle { display: block; }
+      .page-header { padding: 50px 20px 20px; }
+      .page-header h1 { font-size: 2.3rem; }
+      .footer { padding: 24px; flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 600px) {
+      .cert-wrap { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-left">
+      <span class="logo-square"><i class="fa-solid fa-user-graduate"></i></span>
+      <span class="logo-name">Sanjay Katta</span>
+    </div>
+    <nav class="nav-right">
+      <a href="index.html" class="nav-link">ABOUT ME</a>
+      <a href="skills.html" class="nav-link">SKILLS</a>
+      <a href="projects.html" class="nav-link">PROJECTS</a>
+      <a href="certifications.html" class="nav-link active">CERTIFICATIONS</a>
+      <a href="problem-solving.html" class="nav-link">PROBLEM SOLVING</a>
+      <a href="resume.html" class="nav-link">RESUME</a>
+      <a href="contact.html" class="nav-link">CONTACT</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <h1>My <span>Certifications</span></h1>
+      <p>Courses, exams, and credentials I've earned along the way. Click any card to view the full certificate.</p>
+    </section>
+
+    <section class="cert-wrap" id="certWrap">
+
+      <article class="cert-card">
+        <div class="cert-thumb" data-full="Images/Certificate_MicroSoft_Excel.jpeg">
+          <img src="Images/Certificate_MicroSoft_Excel.jpeg" alt="Microsoft Excel certificate" loading="lazy">
+        </div>
+        <div class="cert-body">
+          <div class="cert-provider">Microsoft</div>
+          <div class="cert-title">Microsoft Excel</div>
+          <div class="cert-meta">
+            <span><i class="fa-regular fa-calendar"></i> November 21, 2024</span>
+          </div>
+          <div class="cert-id"><i class="fa-solid fa-hashtag"></i> uL3b-XM8H</div>
+          <div class="cert-actions">
+            <button class="cert-btn primary" data-full="Images/Certificate_MicroSoft_Excel.jpeg">View Certificate</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="cert-card">
+        <div class="cert-thumb" data-full="Images/Certificate_MicroSoft_PowerBI.jpeg">
+          <img src="Images/Certificate_MicroSoft_PowerBI.jpeg" alt="Microsoft Power BI certificate" loading="lazy">
+        </div>
+        <div class="cert-body">
+          <div class="cert-provider">Microsoft</div>
+          <div class="cert-title">Microsoft Power BI</div>
+          <div class="cert-meta">
+            <span><i class="fa-regular fa-calendar"></i> May 15, 2025</span>
+          </div>
+          <div class="cert-id"><i class="fa-solid fa-hashtag"></i> wq2u4-2FbE</div>
+          <div class="cert-actions">
+            <button class="cert-btn primary" data-full="Images/Certificate_MicroSoft_PowerBI.jpeg">View Certificate</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="cert-card">
+        <div class="cert-thumb" data-full="Images/Certificate_Cisco_C++.jpeg">
+          <img src="Images/Certificate_Cisco_C++.jpeg" alt="C++ Programming certificate" loading="lazy">
+        </div>
+        <div class="cert-body">
+          <div class="cert-provider">Cisco</div>
+          <div class="cert-title">C++ Programming</div>
+          <div class="cert-meta">
+            <span><i class="fa-regular fa-calendar"></i> January 2, 2026</span>
+          </div>
+          <div class="cert-actions">
+            <button class="cert-btn primary" data-full="Images/Certificate_Cisco_C++.jpeg">View Certificate</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="cert-card">
+        <div class="cert-thumb" data-full="Images/Certificate_Hackerrank_Problem_Solving.png">
+          <img src="Images/Certificate_Hackerrank_Problem_Solving.png" alt="HackerRank Problem Solving certificate" loading="lazy">
+        </div>
+        <div class="cert-body">
+          <div class="cert-provider">HackerRank</div>
+          <div class="cert-title">Problem Solving</div>
+          <div class="cert-meta">
+            <span><i class="fa-regular fa-calendar"></i> February 26, 2026</span>
+          </div>
+          <div class="cert-id"><i class="fa-solid fa-hashtag"></i> D536AAD0A75C</div>
+          <div class="cert-actions">
+            <button class="cert-btn primary" data-full="Images/Certificate_Hackerrank_Problem_Solving.png">View Certificate</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="cert-card">
+        <div class="cert-thumb" data-full="Images/Certificate_Hackerrank_Sql.png">
+          <img src="Images/Certificate_Hackerrank_Sql.png" alt="HackerRank SQL certificate" loading="lazy">
+        </div>
+        <div class="cert-body">
+          <div class="cert-provider">HackerRank</div>
+          <div class="cert-title">SQL</div>
+          <div class="cert-meta">
+            <span><i class="fa-regular fa-calendar"></i> November 11, 2025</span>
+          </div>
+          <div class="cert-id"><i class="fa-solid fa-hashtag"></i> 955BB263DA34</div>
+          <div class="cert-actions">
+            <button class="cert-btn primary" data-full="Images/Certificate_Hackerrank_Sql.png">View Certificate</button>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    <img id="modalImg" src="" alt="Certificate full view">
+  </div>
+
+  <footer class="footer"><div class="footer-block">
+      <p class="footer-label">Call</p>
+      <a href="tel:+918978806254">+91 8978806254</a>
+    </div>
+    <div class="footer-block">
+      <p class="footer-label">Write</p>
+      <a href="mailto:kattasanjay31@gmail.com">kattasanjay31@gmail.com</a>
+    </div>
+    <div class="footer-block">
+      <p class="footer-label">Follow</p>
+      <div class="footer-icons">
+        <a href="https://github.com/Sanjaysanjay31" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/sanjay-katta-ba1456323/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:kattasanjay31@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://www.instagram.com/sanjay_31_06_" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const navRight = document.querySelector('.nav-right');
+    if (toggle && navRight) {
+      toggle.addEventListener('click', () => navRight.classList.toggle('open'));
+      navRight.querySelectorAll('.nav-link').forEach(link =>
+        link.addEventListener('click', () => navRight.classList.remove('open'))
+      );
+    }
+
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    const modalClose = document.getElementById('modalClose');
+
+    function openModal(src) {
+      modalImg.src = src;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      modal.classList.remove('open');
+      modalImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('certWrap').addEventListener('click', (e) => {
+      const trigger = e.target.closest('[data-full]');
+      if (trigger) openModal(trigger.dataset.full);
+    });
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  </script>
+</body>
+</html>

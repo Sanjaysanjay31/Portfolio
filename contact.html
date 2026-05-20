@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Sanjay Katta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #5072ed;
+      --accent: #0ea5a4;
+      --text: #1c1c1c;
+      --muted: #5a5a5a;
+      --beige: #f1e2d0;
+      --card: #f3ddc5;
+      --soft: #ffffff;
+      --line: #dbe3f5;
+      --bg: #c8d5f1b7;
+    }
+    html, body {
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text); background: var(--bg);
+      scroll-behavior: smooth; -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 60px; background: #fff; border-bottom: 1px solid #eee;
+    }
+    .nav-left { display: flex; align-items: center; gap: 12px; }
+    .logo-square { color: var(--accent); font-size: 1.2rem; display: inline-flex; align-items: center; flex-shrink: 0; }
+    .logo-name { font-weight: 800; font-size: 1.05rem; }
+    .nav-right { display: flex; gap: 32px; }
+    .nav-link { font-size: 0.82rem; letter-spacing: 1.2px; font-weight: 600; color: var(--text); transition: color .2s; }
+    .nav-link:hover, .nav-link.active { color: var(--blue); }
+    .nav-toggle { display: none; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text); }
+
+    /* HEADER */
+    .page-header {
+      text-align: center; padding: 70px 24px 20px;
+      max-width: 760px; margin: 0 auto;
+    }
+    .page-header h1 {
+      font-size: 3.2rem; font-weight: 800; letter-spacing: -2px; line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .page-header h1 span { color: var(--blue); }
+    .page-header p { color: var(--muted); font-size: 1rem; line-height: 1.6; }
+
+    /* LAYOUT */
+    .contact-wrap {
+      max-width: 1200px; margin: 0 auto; padding: 30px 60px 90px;
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; align-items: start;
+    }
+
+    /* INFO PANEL */
+    .info-panel {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 22px; padding: 36px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    .info-list, .socials { position: relative; z-index: 1; }
+    .info-title {
+      font-size: 1.6rem; font-weight: 800; margin-bottom: 10px;
+      position: relative;
+    }
+    .info-sub {
+      font-size: 0.95rem; color: var(--muted); line-height: 1.6;
+      margin-bottom: 28px; position: relative;
+    }
+    .info-list { display: flex; flex-direction: column; gap: 14px; position: relative; }
+    .info-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 14px 16px; border-radius: 14px;
+      background: #fff; border: 1px solid var(--line);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .info-item:hover {
+      transform: translateY(-2px);
+      border-color: var(--blue);
+      box-shadow: 0 10px 24px rgba(80,114,237,0.16);
+    }
+    .info-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: linear-gradient(135deg, #eaf0ff, #d8e0f5);
+      color: var(--blue); font-size: 1.1rem;
+    }
+    .info-item.acc .info-icon { background: linear-gradient(135deg, #defaf8, #b8e9e7); color: var(--accent); }
+    .info-text .label { font-size: 0.7rem; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+    .info-text .value { font-size: 0.98rem; font-weight: 600; margin-top: 2px; word-break: break-word; }
+
+    .map-wrap {
+      position: relative; z-index: 1;
+      margin-top: 18px; border-radius: 14px; overflow: hidden;
+      border: 1px solid var(--line); background: #fff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+    .map-wrap iframe {
+      display: block; width: 100%; height: 220px; border: 0;
+    }
+    .map-link {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px 14px; font-size: 0.8rem; font-weight: 600;
+      color: var(--blue); background: #fff; border-top: 1px solid var(--line);
+      transition: background .2s ease;
+    }
+    .map-link:hover { background: #eaf0ff; }
+
+    .socials { display: flex; gap: 10px; margin-top: 24px; position: relative; }
+    .socials a {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: grid; place-items: center;
+      background: #fff; border: 1px solid var(--line);
+      color: var(--text); font-size: 1.05rem;
+      transition: all .25s ease;
+    }
+    .socials a:hover {
+      background: var(--blue); color: #fff; border-color: var(--blue);
+      transform: translateY(-3px); box-shadow: 0 10px 20px rgba(80,114,237,0.3);
+    }
+
+    /* FORM */
+    .form-panel {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 22px; padding: 36px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    .form-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 6px; }
+    .form-sub { font-size: 0.9rem; color: var(--muted); margin-bottom: 24px; }
+    .form-row { margin-bottom: 16px; }
+    .form-row.split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .field { position: relative; }
+    .field label {
+      position: absolute; top: 14px; left: 16px;
+      font-size: 0.9rem; color: var(--muted);
+      pointer-events: none; transition: all .2s ease;
+      background: var(--soft); padding: 0 6px;
+    }
+    .field input, .field textarea {
+      width: 100%; padding: 14px 16px; font: inherit; font-size: 0.95rem;
+      border: 1px solid var(--line); border-radius: 12px;
+      background: #fff; color: var(--text);
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .field textarea { resize: vertical; min-height: 140px; }
+    .field input:focus, .field textarea:focus {
+      outline: none; border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(80,114,237,0.12);
+    }
+    .field input:focus + label,
+    .field input:not(:placeholder-shown) + label,
+    .field textarea:focus + label,
+    .field textarea:not(:placeholder-shown) + label {
+      top: -8px; font-size: 0.72rem; color: var(--blue); font-weight: 600;
+    }
+    .submit-btn {
+      width: 100%; padding: 14px 22px; border: none; cursor: pointer;
+      background: var(--blue); color: #fff; font: inherit;
+      font-size: 0.85rem; font-weight: 700; letter-spacing: 1.5px;
+      border-radius: 30px; margin-top: 6px;
+      transition: all .25s ease;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .submit-btn:hover {
+      background: #3a59d4; transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(80,114,237,0.35);
+    }
+    .submit-btn i { transition: transform .25s ease; }
+    .submit-btn:hover i { transform: translateX(4px); }
+    .form-note { font-size: 0.78rem; color: var(--muted); margin-top: 12px; text-align: center; }
+    .toast {
+      margin-top: 14px; padding: 12px 16px; border-radius: 12px;
+      background: #defaf3; color: #066a4f; border: 1px solid #a5e3cb;
+      font-size: 0.88rem; font-weight: 600;
+      display: none; align-items: center; gap: 10px;
+    }
+    .toast.show { display: flex; }
+
+    /* FOOTER */
+    .footer {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 30px 60px; background: #fff; border-top: 1px solid #eee;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-left p { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+    .footer-block { text-align: center; }
+    .footer-label { font-size: 0.78rem; font-weight: 700; margin-bottom: 6px; }
+    .footer-block a { font-size: 0.85rem; color: var(--text); }
+    .footer-block a:hover { color: var(--blue); }
+    .footer-icons { display: flex; gap: 20px; justify-content: center; margin-top: 8px; }
+    .footer-icons a { font-size: 1.6rem; transition: color .2s ease, transform .2s ease; } .footer-icons a:hover { color: var(--blue); transform: translateY(-2px); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .contact-wrap { grid-template-columns: 1fr; padding: 24px 32px 70px; }
+    }
+    @media (max-width: 900px) {
+      .navbar { padding: 18px 24px; }
+      .nav-right {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: #fff; flex-direction: column; gap: 0;
+        padding: 12px 0; border-bottom: 1px solid #eee;
+      }
+      .nav-right.open { display: flex; }
+      .nav-right .nav-link { padding: 14px 24px; }
+      .nav-toggle { display: block; }
+      .page-header { padding: 50px 20px 16px; }
+      .page-header h1 { font-size: 2.3rem; }
+      .form-row.split { grid-template-columns: 1fr; }
+      .footer { padding: 24px; flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 560px) {
+      .info-panel, .form-panel { padding: 26px 22px; border-radius: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-left">
+      <span class="logo-square"><i class="fa-solid fa-user-graduate"></i></span>
+      <span class="logo-name">Sanjay Katta</span>
+    </div>
+    <nav class="nav-right">
+      <a href="index.html" class="nav-link">ABOUT ME</a>
+      <a href="skills.html" class="nav-link">SKILLS</a>
+      <a href="projects.html" class="nav-link">PROJECTS</a>
+      <a href="certifications.html" class="nav-link">CERTIFICATIONS</a>
+      <a href="problem-solving.html" class="nav-link">PROBLEM SOLVING</a>
+      <a href="resume.html" class="nav-link">RESUME</a>
+      <a href="contact.html" class="nav-link active">CONTACT</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <h1>Let's <span>Connect</span></h1>
+      <p>Have a project in mind, an opportunity to share, or just want to say hello? Drop a message — I'll get back as soon as I can.</p>
+    </section>
+
+    <section class="contact-wrap">
+
+      <div class="info-panel">
+        <h2 class="info-title">Get in touch</h2>
+        <p class="info-sub">I'm open to internships, freelance work, collaborations, and learning opportunities. Pick whichever channel works best for you.</p>
+
+        <div class="info-list">
+          <a class="info-item" href="mailto:kattasanjay31@gmail.com">
+            <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div class="info-text">
+              <div class="label">Email</div>
+              <div class="value">kattasanjay31@gmail.com</div>
+            </div>
+          </a>
+          <a class="info-item acc" href="tel:+918978806254">
+            <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+            <div class="info-text">
+              <div class="label">Phone</div>
+              <div class="value">+91 89788 06254</div>
+            </div>
+          </a>
+          <a class="info-item" href="https://www.openstreetmap.org/?mlat=16.774702&mlon=82.059550#map=16/16.774702/82.059550" target="_blank" rel="noopener">
+            <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="info-text">
+              <div class="label">Location</div>
+              <div class="value">Andhra Pradesh, India</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="map-wrap">
+          <iframe
+            title="My Location"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=82.04955%2C16.76470%2C82.06955%2C16.78470&layer=mapnik&marker=16.774702%2C82.059550"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <a class="map-link" href="https://www.openstreetmap.org/?mlat=16.774702&mlon=82.059550#map=17/16.774702/82.059550" target="_blank" rel="noopener">
+            <i class="fa-solid fa-up-right-from-square"></i> View larger map
+          </a>
+        </div>
+
+        <div class="socials">
+          <a href="https://github.com/Sanjaysanjay31" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/sanjay-katta-ba1456323/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="mailto:kattasanjay31@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+          <a href="tel:+918978806254" aria-label="Phone"><i class="fa-solid fa-phone"></i></a>
+          <a href="https://www.instagram.com/sanjay_31_06_" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="form-panel">
+        <h2 class="form-title">Send a message</h2>
+        <p class="form-sub">Fill in the form below and I'll reply to your email.</p>
+
+        <form id="contactForm" autocomplete="off">
+          <div class="form-row split">
+            <div class="field">
+              <input type="text" id="name" name="name" placeholder=" " required />
+              <label for="name">Your Name</label>
+            </div>
+            <div class="field">
+              <input type="email" id="email" name="email" placeholder=" " required />
+              <label for="email">Your Email</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <input type="text" id="subject" name="subject" placeholder=" " />
+              <label for="subject">Subject</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <textarea id="message" name="message" placeholder=" " required></textarea>
+              <label for="message">Your Message</label>
+            </div>
+          </div>
+          <button type="submit" class="submit-btn">
+            SEND MESSAGE <i class="fa-solid fa-paper-plane"></i>
+          </button>
+          <p class="form-note">Your details are only used to reply. Nothing is stored.</p>
+          <div class="toast" id="toast">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Thanks! Your message is ready — your email app should now open.</span>
+          </div>
+        </form>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="footer"><div class="footer-block">
+      <p class="footer-label">Call</p>
+      <a href="tel:+918978806254">+91 8978806254</a>
+    </div>
+    <div class="footer-block">
+      <p class="footer-label">Write</p>
+      <a href="mailto:kattasanjay31@gmail.com">kattasanjay31@gmail.com</a>
+    </div>
+    <div class="footer-block">
+      <p class="footer-label">Follow</p>
+      <div class="footer-icons">
+        <a href="https://github.com/Sanjaysanjay31" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/sanjay-katta-ba1456323/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:kattasanjay31@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://www.instagram.com/sanjay_31_06_" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const navRight = document.querySelector('.nav-right');
+    if (toggle && navRight) {
+      toggle.addEventListener('click', () => navRight.classList.toggle('open'));
+      navRight.querySelectorAll('.nav-link').forEach(link =>
+        link.addEventListener('click', () => navRight.classList.remove('open'))
+      );
+    }
+
+    const form = document.getElementById('contactForm');
+    const toast = document.getElementById('toast');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = encodeURIComponent(document.getElementById('name').value.trim());
+      const email = document.getElementById('email').value.trim();
+      const subject = encodeURIComponent(document.getElementById('subject').value.trim() || 'Hello from your portfolio');
+      const message = encodeURIComponent(document.getElementById('message').value.trim());
+      const body = `Name: ${decodeURIComponent(name)}%0AEmail: ${email}%0A%0A${message}`;
+      window.location.href = `mailto:kattasanjay31@gmail.com?subject=${subject}&body=${body}`;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 5000);
+    });
+  </script>
+</body>
+</html>

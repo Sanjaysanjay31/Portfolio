@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Sanjay Katta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #5072ed;
+      --accent: #0ea5a4;
+      --text: #1c1c1c;
+      --muted: #5a5a5a;
+      --beige: #f1e2d0;
+      --card: #f3ddc5;
+      --soft: #b0f09cd8;
+      --line: #ecdf9c;
+      --bg: #dbe4f8ff;
+    }
+    html, body {
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text); background: var(--bg);
+      scroll-behavior: smooth; -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 60px; background: #fff; border-bottom: 1px solid #eee;
+    }
+    .nav-left { display: flex; align-items: center; gap: 12px; }
+    .logo-square { color: var(--accent); font-size: 1.2rem; display: inline-flex; align-items: center; flex-shrink: 0; }
+    .logo-name { font-weight: 800; font-size: 1.05rem; }
+    .nav-right { display: flex; gap: 32px; }
+    .nav-link { font-size: 0.82rem; letter-spacing: 1.2px; font-weight: 600; color: var(--text); transition: color .2s; }
+    .nav-link:hover, .nav-link.active { color: var(--blue); }
+    .nav-toggle { display: none; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text); }
+
+    /* HEADER */
+    .page-header {
+      text-align: center; padding: 70px 24px 30px;
+      max-width: 760px; margin: 0 auto;
+    }
+    .page-header h1 {
+      font-size: 3.2rem; font-weight: 800; letter-spacing: -2px; line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .page-header h1 span { color: var(--blue); }
+    .page-header p { color: var(--muted); font-size: 1rem; line-height: 1.6; }
+
+    /* PROJECTS */
+    .projects-wrap {
+      max-width: 1300px; margin: 0 auto; padding: 20px 60px 90px;
+      display: flex; flex-direction: column; gap: 60px;
+      counter-reset: project;
+    }
+    .project { counter-increment: project; }
+    .project-info::before {
+      content: counter(project, decimal-leading-zero);
+      font-size: 2.4rem; font-weight: 800; line-height: 1;
+      color: #1c1c1c;
+      margin-bottom: 6px;
+    }
+    .project {
+      display: grid; grid-template-columns: 1fr 1.1fr; gap: 0;
+      background: #fff; border: 1px solid var(--line);
+      border-radius: 22px; overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      min-height: 480px;
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+    .project:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 50px rgba(0,0,0,0.10);
+    }
+    .project.reverse { grid-template-columns: 1.1fr 1fr; }
+    .project.portrait { grid-template-columns: 1.6fr 1fr; }
+    .project.portrait .main-img-wrap { aspect-ratio: 9/16; min-height: 0; max-height: 460px; margin: 0 auto; }
+    .project.portrait .main-img-wrap img { object-fit: contain; background: #fff; }
+    .project.portrait .thumb { width: 54px; height: 96px; }
+    .project.portrait .thumbs { justify-content: center; }
+    .project.reverse .project-info { order: 2; }
+    .project.reverse .project-gallery { order: 1; }
+
+    .project-info {
+      padding: 50px 46px; display: flex; flex-direction: column;
+      justify-content: center; gap: 14px;
+      background: var(--info-bg, var(--soft));
+    }
+    .project-role { font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+    .project-title { font-size: 2rem; font-weight: 800; color: var(--accent-color, var(--blue)); line-height: 1.15; letter-spacing: -0.5px; }
+    .project-gallery { background: var(--gallery-bg, var(--bg)); }
+
+    /* Per-project themes */
+    .theme-1 { --info-bg: #ffe3c2; --gallery-bg: #fff4e3; --accent-color: #e76f51; }
+    .theme-2 { --info-bg: #c8e8ff; --gallery-bg: #e8f4ff; --accent-color: #0369a1; }
+    .theme-3 { --info-bg: #d9f5d3; --gallery-bg: #ecfae8; --accent-color: #15803d; }
+    .theme-4 { --info-bg: #f3d9ff; --gallery-bg: #f8f4ec; --accent-color: #7e22ce; }
+    .theme-5 { --info-bg: #ffd9e3; --gallery-bg: #fff0f4; --accent-color: #be185d; }
+    .theme-6 { --info-bg: #fff4b8; --gallery-bg: #fffbe0; --accent-color: #a16207; }
+    .chip { background: rgba(255,255,255,0.85); }
+    .project-desc { color: var(--text); font-size: 0.95rem; line-height: 1.65; }
+    .tech-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .chip {
+      padding: 6px 12px; border-radius: 999px;
+      background: #fff; border: 1px solid var(--line);
+      font-size: 0.74rem; font-weight: 600; color: var(--text);
+    }
+    .tech-stack { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+    .tech-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 0.85rem; }
+    .tech-label { font-weight: 700; color: var(--text); min-width: 110px; }
+    .tech-row .chip { font-size: 0.72rem; padding: 5px 10px; }
+    .project-actions { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 20px; border-radius: 12px;
+      font-size: 0.85rem; font-weight: 600;
+      border: 1px solid var(--line); background: #fff; color: var(--text);
+      transition: all .2s ease; cursor: pointer;
+    }
+    .btn.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.10); }
+
+    /* GALLERY */
+    .project-gallery {
+      padding: 30px; display: flex; flex-direction: column; gap: 14px;
+      background: var(--gallery-bg, var(--bg));
+    }
+    .main-img-wrap {
+      flex: 1; min-height: 320px; border-radius: 14px; overflow: hidden;
+      background: #fff; border: 1px solid var(--line); cursor: zoom-in;
+      display: grid; place-items: center;
+    }
+    .main-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+    .main-img-wrap:hover img { transform: scale(1.03); }
+    .thumbs { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
+    .thumb {
+      flex-shrink: 0; width: 84px; height: 64px; border-radius: 10px;
+      overflow: hidden; cursor: pointer; border: 2px solid transparent;
+      background: #fff; transition: border-color .2s ease, transform .2s ease;
+    }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .thumb:hover { transform: translateY(-2px); }
+    .thumb.active { border-color: var(--blue); }
+
+    /* MODAL */
+    .modal {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+      display: none; align-items: center; justify-content: center;
+      z-index: 1000; padding: 30px;
+    }
+    .modal.open { display: flex; }
+    .modal img { max-width: 100%; max-height: 90vh; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .modal-close {
+      position: absolute; top: 20px; right: 24px;
+      background: #fff; border: none; width: 42px; height: 42px;
+      border-radius: 50%; font-size: 1.1rem; cursor: pointer;
+      display: grid; place-items: center;
+    }
+
+    /* FOOTER */
+    .footer {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 30px 60px; background: #fff; border-top: 1px solid #eee;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-left p { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+    .footer-block { text-align: center; }
+    .footer-label { font-size: 0.78rem; font-weight: 700; margin-bottom: 6px; }
+    .footer-block a { font-size: 0.85rem; color: var(--text); }
+    .footer-block a:hover { color: var(--blue); }
+    .footer-icons { display: flex; gap: 20px; justify-content: center; margin-top: 8px; }
+    .footer-icons a { font-size: 1.6rem; transition: color .2s ease, transform .2s ease; } .footer-icons a:hover { color: var(--blue); transform: translateY(-2px); }
+
+    @media (max-width: 960px) {
+      .project, .project.reverse { grid-template-columns: 1fr; }
+      .project.reverse .project-info { order: 1; }
+      .project.reverse .project-gallery { order: 2; }
+      .project-info { padding: 36px 28px; }
+      .project-title { font-size: 1.5rem; }
+      .main-img-wrap { min-height: 240px; }
+      .navbar { padding: 18px 24px; }
+      .nav-right {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: #fff; flex-direction: column; gap: 0;
+        padding: 12px 0; border-bottom: 1px solid #eee;
+      }
+      .nav-right.open { display: flex; }
+      .nav-right .nav-link { padding: 14px 24px; }
+      .nav-toggle { display: block; }
+      .page-header { padding: 50px 20px 20px; }
+      .page-header h1 { font-size: 2.3rem; }
+      .projects-wrap { padding: 20px 24px 70px; gap: 40px; }
+      .footer { padding: 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-left">
+      <span class="logo-square"><i class="fa-solid fa-user-graduate"></i></span>
+      <span class="logo-name">Sanjay Katta</span>
+    </div>
+    <nav class="nav-right">
+      <a href="index.html" class="nav-link">ABOUT ME</a>
+      <a href="skills.html" class="nav-link">SKILLS</a>
+      <a href="projects.html" class="nav-link active">PROJECTS</a>
+      <a href="certifications.html" class="nav-link">CERTIFICATIONS</a>
+      <a href="problem-solving.html" class="nav-link">PROBLEM SOLVING</a>
+      <a href="resume.html" class="nav-link">RESUME</a>
+      <a href="contact.html" class="nav-link">CONTACT</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <h1>My <span>Projects</span></h1>
+      <p>A collection of things I've built — from full-stack web apps to data dashboards. Click any thumbnail to switch, or the main image to zoom.</p>
+    </section>
+
+    <section class="projects-wrap" id="projectsWrap">
+
+      <!-- PROJECT 1 -->
+      <article class="project theme-4">
+        <div class="project-info">
+          <div class="project-role">Data Analytics &amp; Business Intelligence</div>
+          <h2 class="project-title">Sales Dashboard</h2>
+          <p class="project-desc">An interactive Power BI dashboard built on a Kaggle sales dataset that turns raw transactions into business-ready insights. It tracks total revenue, units sold, and profit across years and product categories, with drill-down views by region and time period. Custom DAX measures, slicers, and clean visual storytelling make it easy to spot trends, top performers, and growth opportunities at a glance.</p>
+          <div class="tech-chips">
+            <span class="chip">Power BI</span>
+            <span class="chip">DAX</span>
+            <span class="chip">Data Modeling</span>
+            <span class="chip">Kaggle Dataset</span>
+          </div>
+          <div class="project-actions">
+            <a class="btn primary" href="https://www.linkedin.com/posts/sanjay-katta-ba1456323_newdashboard-powerbi-technicalhub-activity-7271544970891743232-RJvD?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFHCJCkBgsRe60oE8J27UFq1HB5fQSTKtOQ" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i> View on LinkedIn</a>
+          </div>
+        </div>
+        <div class="project-gallery">
+          <div class="main-img-wrap">
+            <img class="main-img" src="Images/Project_01_Sales_DashBoard_by_year.jpeg" alt="Sales Dashboard — by year view">
+          </div>
+          <div class="thumbs">
+            <div class="thumb active"><img src="Images/Project_01_Sales_DashBoard_by_year.jpeg" alt="Sales by year"></div>
+            <div class="thumb"><img src="Images/Project_01_Sales_DashBoard_by_category.jpeg" alt="Sales by category"></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 2 -->
+      <article class="project theme-2">
+        <div class="project-info">
+          <div class="project-role">Full-Stack Web Development</div>
+          <h2 class="project-title">EventConnect</h2>
+          <p class="project-desc">A smart, full-stack platform that connects event organizers and students in a simple, fast, and secure way. In many colleges, students struggle to discover events, and organizers struggle to manage registrations and participants — EventConnect solves both sides from one centralized place. Organizers can create, manage, and track events end-to-end, while students can effortlessly explore and register for the ones that interest them.</p>
+          <div class="tech-stack">
+            <div class="tech-row"><span class="tech-label">Frontend:</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div>
+            <div class="tech-row"><span class="tech-label">Backend:</span><span class="chip">FastAPI</span></div>
+            <div class="tech-row"><span class="tech-label">Database:</span><span class="chip">Supabase</span></div>
+            <div class="tech-row"><span class="tech-label">Deployment:</span><span class="chip">Vercel</span><span class="chip">Render</span></div>
+            <div class="tech-row"><span class="tech-label">Tools:</span><span class="chip">GitHub</span><span class="chip">VS Code</span></div>
+          </div>
+          <div class="project-actions">
+            <a class="btn primary" href="https://event-connect-project.vercel.app/" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> Live Demo</a>
+            <a class="btn" href="https://github.com/Sanjaysanjay31/EventConnect_Project" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+          </div>
+        </div>
+        <div class="project-gallery">
+          <div class="main-img-wrap">
+            <img class="main-img" src="Images/Project_02_Event_Connet_HomePage.jpeg" alt="EventConnect home page">
+          </div>
+          <div class="thumbs">
+            <div class="thumb active"><img src="Images/Project_02_Event_Connet_HomePage.jpeg" alt="Home page"></div>
+            <div class="thumb"><img src="Images/Project_02_Event_Connet_HomePage_2.jpeg" alt="Home page 2"></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 3 -->
+      <article class="project portrait theme-3">
+        <div class="project-info">
+          <div class="project-role">Full-Stack App Development</div>
+          <h2 class="project-title">WorkMithra</h2>
+          <p class="project-desc">A voice-first mobile app that connects everyday clients with nearby skilled workers — plumbers, electricians, painters, and more — in their own language. Built for users who prefer speaking over typing, WorkMithra uses on-device speech, real-time translation, and an AI assistant to handle the entire booking flow: discover workers on a map, hear their details read aloud, and confirm the job with a simple voice command. End-to-end OTP auth, location-aware matching, and an LLM-driven intent layer make the experience feel natural even for first-time smartphone users.</p>
+          <div class="tech-stack">
+            <div class="tech-row"><span class="tech-label">Frontend:</span><span class="chip">React Native</span><span class="chip">Expo</span></div>
+            <div class="tech-row"><span class="tech-label">Backend:</span><span class="chip">FastAPI</span><span class="chip">Render</span></div>
+            <div class="tech-row"><span class="tech-label">Database:</span><span class="chip">Supabase</span><span class="chip">SQLAlchemy</span></div>
+            <div class="tech-row"><span class="tech-label">Auth:</span><span class="chip">Supabase OTP</span></div>
+            <div class="tech-row"><span class="tech-label">AI / NLP:</span><span class="chip">Sarvam AI (STT / TTS / Translate)</span><span class="chip">Llama 3.1 8B Instruct</span></div>
+            <div class="tech-row"><span class="tech-label">Maps:</span><span class="chip">OpenStreetMap</span></div>
+          </div>
+          <div class="project-actions">
+            <a class="btn primary" href="https://github.com/Sanjaysanjay31/WorkMithra_Project/releases/download/v1.0/WorkMithra.apk" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download APK</a>
+            <a class="btn" href="https://github.com/Sanjaysanjay31/WorkMithra_Project" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+          </div>
+        </div>
+        <div class="project-gallery">
+          <div class="main-img-wrap">
+            <img class="main-img" src="Images/Project_03_Index_page.jpeg" alt="WorkMithra index page">
+          </div>
+          <div class="thumbs">
+            <div class="thumb active"><img src="Images/Project_03_Index_page.jpeg" alt="Index page"></div>
+            <div class="thumb"><img src="Images/Project_03_Client_HomePage.jpeg" alt="Client home"></div>
+            <div class="thumb"><img src="Images/Project_03_Client_to_Worker.jpeg" alt="Client to worker"></div>
+            <div class="thumb"><img src="Images/Project_03_Interaction_between_Client_to_Worker.jpeg" alt="Interaction"></div>
+            <div class="thumb"><img src="Images/Project_03_AI-Voice_Assistant.jpeg" alt="AI voice assistant"></div>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    <img id="modalImg" src="" alt="Project full view">
+  </div>
+
+  <footer class="footer"><div class="footer-block">
+      <p class="footer-label">Call</p>
+      <a href="tel:+918978806254">+91 8978806254</a>
+    </div>
+    <div class="footer-block">
+      <p class="footer-label">Write</p>
+      <a href="mailto:kattasanjay31@gmail.com">kattasanjay31@gmail.com</a>
+    </div>
+    <div class="footer-block">
+      <p class="footer-label">Follow</p>
+      <div class="footer-icons">
+        <a href="https://github.com/Sanjaysanjay31" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/sanjay-katta-ba1456323/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:kattasanjay31@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://www.instagram.com/sanjay_31_06_" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const navRight = document.querySelector('.nav-right');
+    if (toggle && navRight) {
+      toggle.addEventListener('click', () => navRight.classList.toggle('open'));
+      navRight.querySelectorAll('.nav-link').forEach(link =>
+        link.addEventListener('click', () => navRight.classList.remove('open'))
+      );
+    }
+
+    // Thumbnail switching per project
+    document.querySelectorAll('.project-gallery').forEach(gallery => {
+      const mainImg = gallery.querySelector('.main-img');
+      const thumbs = gallery.querySelectorAll('.thumb');
+      thumbs.forEach(thumb => {
+        thumb.addEventListener('click', () => {
+          const newSrc = thumb.querySelector('img').src;
+          mainImg.src = newSrc;
+          thumbs.forEach(t => t.classList.remove('active'));
+          thumb.classList.add('active');
+        });
+      });
+    });
+
+    // Modal zoom
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    const modalClose = document.getElementById('modalClose');
+    function openModal(src) {
+      modalImg.src = src;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      modal.classList.remove('open');
+      modalImg.src = '';
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('.main-img-wrap').forEach(wrap => {
+      wrap.addEventListener('click', () => openModal(wrap.querySelector('img').src));
+    });
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  </script>
+</body>
+</html>

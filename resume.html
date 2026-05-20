@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume — Sanjay Katta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #5072ed;
+      --accent: #0ea5a4;
+      --text: #1c1c1c;
+      --muted: #5a5a5a;
+      --line: #ecdf9c;
+      --bg: #dbe4f8ff;
+      --soft: #b0f09cd8;
+    }
+    html, body {
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text); background: var(--bg);
+      scroll-behavior: smooth; -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 60px; background: #fff; border-bottom: 1px solid #eee;
+    }
+    .nav-left { display: flex; align-items: center; gap: 12px; }
+    .logo-square { color: var(--accent); font-size: 1.2rem; display: inline-flex; align-items: center; }
+    .logo-name { font-weight: 800; font-size: 1.05rem; }
+    .nav-right { display: flex; gap: 32px; }
+    .nav-link { font-size: 0.82rem; letter-spacing: 1.2px; font-weight: 600; color: var(--text); transition: color .2s; }
+    .nav-link:hover, .nav-link.active { color: var(--blue); }
+    .nav-toggle { display: none; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text); }
+
+    /* TOOLBAR */
+    .toolbar {
+      max-width: 880px; margin: 30px auto 0; padding: 0 24px;
+      display: flex; justify-content: flex-end; gap: 10px;
+    }
+    .tool-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: 10px;
+      background: var(--blue); color: #fff; border: none;
+      font-size: 0.85rem; font-weight: 600; cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .tool-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(80,114,237,0.35); }
+
+    /* RESUME SHEET */
+    .resume {
+      max-width: 880px; margin: 18px auto 80px;
+      background: #fff; border-radius: 16px;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.10);
+      padding: 56px 60px;
+    }
+    .resume-head {
+      border-bottom: 2px solid var(--blue); padding-bottom: 18px; margin-bottom: 24px;
+      display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+    }
+    .resume-head-text { min-width: 0; }
+    .resume-photo {
+      width: 110px; height: 110px; border-radius: 50%;
+      overflow: hidden; border: 3px solid var(--blue);
+      box-shadow: 0 6px 16px rgba(80,114,237,0.25); flex-shrink: 0;
+    }
+    .resume-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .resume-head h1 { font-size: 2.4rem; font-weight: 800; letter-spacing: -1px; }
+    .resume-head .title { font-size: 0.95rem; color: var(--blue); font-weight: 700; margin-top: 4px; }
+    .contact-row {
+      display: flex; flex-wrap: wrap; gap: 16px 22px; margin-top: 14px;
+      font-size: 0.82rem; color: var(--muted);
+    }
+    .contact-row a { color: var(--muted); }
+    .contact-row a:hover { color: var(--blue); }
+    .contact-row i { color: var(--blue); margin-right: 6px; }
+
+    .section { margin-top: 26px; }
+    .section h2 {
+      font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--blue); font-weight: 800; margin-bottom: 12px;
+      border-bottom: 1px solid #eee; padding-bottom: 6px;
+    }
+
+    .summary { font-size: 0.92rem; line-height: 1.65; color: var(--text); }
+
+    .edu-item, .proj-item, .cert-item { margin-bottom: 14px; }
+    .row-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      flex-wrap: wrap; gap: 6px;
+    }
+    .row-title { font-weight: 700; font-size: 0.98rem; }
+    .row-meta { font-size: 0.8rem; color: var(--muted); }
+    .row-sub { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+    .row-desc { font-size: 0.88rem; line-height: 1.6; margin-top: 6px; color: var(--text); }
+
+    .skills-grid { display: grid; grid-template-columns: 160px 1fr; gap: 8px 18px; font-size: 0.88rem; }
+    .skills-grid dt { font-weight: 700; }
+    .skills-grid dd { color: var(--text); }
+
+    .tech-inline { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+    .tech-inline strong { color: var(--text); font-weight: 600; }
+
+    ul.bullets { margin: 6px 0 0 18px; }
+    ul.bullets li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 3px; }
+
+    /* FOOTER */
+    .footer {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 30px 60px; background: #fff; border-top: 1px solid #eee;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-left p { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+    .footer-block { text-align: center; }
+    .footer-label { font-size: 0.78rem; font-weight: 700; margin-bottom: 6px; }
+    .footer-block a { font-size: 0.85rem; color: var(--text); }
+    .footer-icons { display: flex; gap: 20px; justify-content: center; margin-top: 8px; }
+    .footer-icons a { font-size: 1.6rem; transition: color .2s ease, transform .2s ease; } .footer-icons a:hover { color: var(--blue); transform: translateY(-2px); }
+
+    @media (max-width: 900px) {
+      .navbar { padding: 18px 24px; }
+      .nav-right {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: #fff; flex-direction: column; gap: 0;
+        padding: 12px 0; border-bottom: 1px solid #eee;
+      }
+      .nav-right.open { display: flex; }
+      .nav-right .nav-link { padding: 14px 24px; }
+      .nav-toggle { display: block; }
+      .resume { padding: 36px 28px; margin: 14px 16px 60px; }
+      .resume-head h1 { font-size: 1.8rem; }
+      .skills-grid { grid-template-columns: 1fr; gap: 2px 0; }
+      .skills-grid dt { margin-top: 8px; }
+      .footer { padding: 24px; flex-direction: column; align-items: flex-start; }
+    }
+
+    /* PRINT (Save as PDF) */
+    @media print {
+      body { background: #fff; }
+      .navbar, .footer, .toolbar { display: none !important; }
+      .resume {
+        box-shadow: none; margin: 0; padding: 26px 32px;
+        max-width: 100%; border-radius: 0;
+      }
+      a { color: var(--text) !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-left">
+      <span class="logo-square"><i class="fa-solid fa-user-graduate"></i></span>
+      <span class="logo-name">Sanjay Katta</span>
+    </div>
+    <nav class="nav-right">
+      <a href="index.html" class="nav-link">ABOUT ME</a>
+      <a href="skills.html" class="nav-link">SKILLS</a>
+      <a href="projects.html" class="nav-link">PROJECTS</a>
+      <a href="certifications.html" class="nav-link">CERTIFICATIONS</a>
+      <a href="problem-solving.html" class="nav-link">PROBLEM SOLVING</a>
+      <a href="resume.html" class="nav-link active">RESUME</a>
+      <a href="contact.html" class="nav-link">CONTACT</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  </header>
+
+  <div class="toolbar">
+    <button class="tool-btn" onclick="window.print()"><i class="fa-solid fa-download"></i> Download as PDF</button>
+  </div>
+
+  <main class="resume">
+
+    <header class="resume-head">
+      <div class="resume-head-text">
+        <h1>Sanjay Katta</h1>
+        <div class="title">Aspiring Full-Stack Developer &amp; Data Science Student</div>
+        <div class="contact-row">
+          <span><i class="fa-solid fa-phone"></i><a href="tel:+918978806254">+91 8978806254</a></span>
+          <span><i class="fa-solid fa-envelope"></i><a href="mailto:kattasanjay31@gmail.com">kattasanjay31@gmail.com</a></span>
+          <span><i class="fa-brands fa-linkedin"></i><a href="https://www.linkedin.com/in/sanjay-katta-ba1456323/" target="_blank" rel="noopener">linkedin.com/in/sanjay-katta</a></span>
+          <span><i class="fa-brands fa-github"></i><a href="https://github.com/Sanjaysanjay31" target="_blank" rel="noopener">github.com/Sanjaysanjay31</a></span>
+          <span><i class="fa-solid fa-globe"></i><a href="#" target="_blank" rel="noopener">sanjaykatta.portfolio.dev</a></span>
+        </div>
+      </div>
+      <div class="resume-photo">
+        <img src="Images/About_Me_At_Mall_1.jpeg" alt="Sanjay Katta">
+      </div>
+    </header>
+
+    <section class="section">
+      <h2>Summary</h2>
+      <p class="summary">B.Tech Data Science student passionate about building practical, user-facing software — from full-stack web apps to AI-powered mobile experiences and BI dashboards. Comfortable across the stack with Python/FastAPI on the backend, React &amp; React Native on the frontend, and SQL/Supabase for data. Quick learner who enjoys turning real problems into clean, working products.</p>
+    </section>
+
+    <section class="section">
+      <h2>Education</h2>
+      <div class="edu-item">
+        <div class="row-head">
+          <span class="row-title">B.Tech, Data Science</span>
+          <span class="row-meta">2024 – 2028</span>
+        </div>
+        <div class="row-sub">Aditya University</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Technical Skills</h2>
+      <dl class="skills-grid">
+        <dt>Frontend</dt><dd>HTML, CSS, JavaScript</dd>
+        <dt>Backend</dt><dd>Python, FastAPI, REST APIs, SQLAlchemy</dd>
+        <dt>Databases</dt><dd>MySQL, SQL, Supabase</dd>
+        <dt>Data &amp; BI</dt><dd>Power BI, DAX, Excel, Data Visualization</dd>
+        <dt>Tools &amp; Cloud</dt><dd>Git, GitHub, VS Code, Expo, Vercel, Render</dd>
+        <dt>Soft Skills</dt><dd>Problem Solving, Communication, Team Work, Quick Learning, Presentation</dd>
+      </dl>
+    </section>
+
+    <section class="section">
+      <h2>Projects</h2>
+
+      <div class="proj-item">
+        <div class="row-head">
+          <span class="row-title">WorkMithra — Full-Stack Voice-First Mobile App</span>
+          <span class="row-meta"><a href="https://github.com/Sanjaysanjay31/WorkMithra_Project" target="_blank" rel="noopener">github.com/Sanjaysanjay31/WorkMithra_Project</a></span>
+        </div>
+        <p class="row-desc">A multilingual mobile app that connects everyday clients with nearby skilled workers using voice commands. Integrated speech-to-text, text-to-speech, and translation to make the booking flow accessible for first-time smartphone users, with map-based discovery and LLM-driven intent detection.</p>
+        <div class="tech-inline"><strong>Stack:</strong> React Native, Expo, FastAPI, Render, Supabase, SQLAlchemy, Sarvam AI, OpenStreetMap, Llama 3.1 8B Instruct</div>
+      </div>
+
+      <div class="proj-item">
+        <div class="row-head">
+          <span class="row-title">EventConnect — Full-Stack Event Management Platform</span>
+          <span class="row-meta"><a href="https://event-connect-project.vercel.app/" target="_blank" rel="noopener">event-connect-project.vercel.app</a></span>
+        </div>
+        <p class="row-desc">A centralized web platform that helps college organizers create and manage events while letting students discover and register effortlessly. Solves the common gap between event reach and registration logistics with a clean, secure, end-to-end flow.</p>
+        <div class="tech-inline"><strong>Stack:</strong> HTML, CSS, JavaScript, FastAPI, Supabase, Vercel, Render</div>
+      </div>
+
+      <div class="proj-item">
+        <div class="row-head">
+          <span class="row-title">Sales Dashboard — Power BI Analytics</span>
+          <span class="row-meta"><a href="https://www.linkedin.com/posts/sanjay-katta-ba1456323_newdashboard-powerbi-technicalhub-activity-7271544970891743232-RJvD" target="_blank" rel="noopener">View on LinkedIn</a></span>
+        </div>
+        <p class="row-desc">An interactive Power BI dashboard built on a Kaggle sales dataset, surfacing revenue, units sold, and profit trends across years, categories, and regions. Designed with custom DAX measures, drill-downs, and slicers for self-serve business exploration.</p>
+        <div class="tech-inline"><strong>Stack:</strong> Power BI, DAX, Data Modeling, Kaggle Dataset</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Certifications</h2>
+      <ul class="bullets">
+        <li><strong>HackerRank</strong> — Problem Solving (Feb 2026) &nbsp;·&nbsp; <span class="row-meta">ID: D536AAD0A75C</span></li>
+        <li><strong>HackerRank</strong> — SQL (Nov 2025) &nbsp;·&nbsp; <span class="row-meta">ID: 955BB263DA34</span></li>
+        <li><strong>Cisco</strong> — C++ Programming (Jan 2026)</li>
+        <li><strong>Microsoft</strong> — Power BI (May 2025) &nbsp;·&nbsp; <span class="row-meta">ID: wq2u4-2FbE</span></li>
+        <li><strong>Microsoft</strong> — Excel (Nov 2024) &nbsp;·&nbsp; <span class="row-meta">ID: uL3b-XM8H</span></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="footer"><div class="footer-block">
+      <p class="footer-label">Call</p>
+      <a href="tel:+918978806254">+91 8978806254</a>
+    </div>
+    <div class="footer-block">
+      <p class="footer-label">Write</p>
+      <a href="mailto:kattasanjay31@gmail.com">kattasanjay31@gmail.com</a>
+    </div>
+    <div class="footer-block">
+      <p class="footer-label">Follow</p>
+      <div class="footer-icons">
+        <a href="https://github.com/Sanjaysanjay31" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/sanjay-katta-ba1456323/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:kattasanjay31@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://www.instagram.com/sanjay_31_06_" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const navRight = document.querySelector('.nav-right');
+    if (toggle && navRight) {
+      toggle.addEventListener('click', () => navRight.classList.toggle('open'));
+      navRight.querySelectorAll('.nav-link').forEach(link =>
+        link.addEventListener('click', () => navRight.classList.remove('open'))
+      );
+    }
+  </script>
+</body>
+</html>

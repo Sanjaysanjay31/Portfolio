@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills — Sanjay Katta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #5072ed;
+      --accent: #0ea5a4;
+      --text: #1c1c1c;
+      --muted: #5a5a5a;
+      --beige: #f1e2d0;
+      --card: #f3ddc5;
+      --soft: #bbe6aed8;
+      --line: #ecdf9c;
+      --bg: #dbe4f8ff;
+    }
+    html, body {
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text); background: var(--bg);
+      scroll-behavior: smooth; -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 60px; background: #fff; border-bottom: 1px solid #eee;
+    }
+    .nav-left { display: flex; align-items: center; gap: 12px; }
+    .logo-square { color: var(--accent); font-size: 1.2rem; display: inline-flex; align-items: center; flex-shrink: 0; }
+    .logo-name { font-weight: 800; font-size: 1.05rem; }
+    .nav-right { display: flex; gap: 32px; }
+    .nav-link { font-size: 0.82rem; letter-spacing: 1.2px; font-weight: 600; color: var(--text); transition: color .2s; }
+    .nav-link:hover, .nav-link.active { color: var(--blue); }
+    .nav-toggle { display: none; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text); }
+
+    /* HEADER */
+    .page-header {
+      text-align: center; padding: 70px 24px 30px;
+      max-width: 760px; margin: 0 auto;
+    }
+    .page-header h1 {
+      font-size: 3.2rem; font-weight: 800; letter-spacing: -2px; line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .page-header h1 span { color: var(--blue); }
+    .page-header p { color: var(--muted); font-size: 1rem; line-height: 1.6; }
+
+    /* FLOATING LOGO (follows cursor) */
+    .float-logo {
+      position: fixed; top: 0; left: 0;
+      width: 150px; height: 150px;
+      border-radius: 28px;
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+      display: grid; place-items: center;
+      pointer-events: none; z-index: 999;
+      opacity: 0; transform: translate(-50%, -120%) scale(0.6);
+      transition: opacity .25s ease, transform .35s cubic-bezier(.2,.9,.3,1.3);
+    }
+    .float-logo.show {
+      opacity: 1; transform: translate(-50%, -120%) scale(1);
+      animation: floaty 2.6s ease-in-out infinite 0.35s;
+    }
+    .float-logo img { width: 96px; height: 96px; object-fit: contain; display: block; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.15)); }
+    .float-logo i { font-size: 5rem; }
+    @keyframes floaty {
+      0%, 100% { transform: translate(-50%, -120%) scale(1); }
+      50%      { transform: translate(-50%, calc(-120% - 8px)) scale(1.04); }
+    }
+    .float-logo::after {
+      content: ''; position: absolute; bottom: -10px; left: 50%;
+      width: 18px; height: 18px; background: #fff;
+      border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    /* SKILLS SECTIONS */
+    .skills-wrap {
+      max-width: 1240px; margin: 0 auto; padding: 20px 60px 90px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 26px;
+    }
+    .category {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 18px; padding: 30px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.04);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .category:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+    }
+    .cat-head { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+    .cat-icon {
+      width: 42px; height: 42px; border-radius: 12px;
+      display: grid; place-items: center; font-size: 1rem;
+      background: var(--card); color: var(--text);
+      border: 1px solid var(--line);
+    }
+    .cat-title { font-size: 1.12rem; font-weight: 700; }
+    .cat-sub { font-size: 0.7rem; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px; }
+
+    .skill-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    }
+    .skill {
+      padding: 16px 10px; min-height: 58px;
+      border-radius: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      display: grid; place-items: center; text-align: center;
+      font-size: 0.85rem; font-weight: 600; color: var(--text);
+      cursor: pointer;
+      transition: background .25s ease, border-color .25s ease, transform .25s ease, color .25s ease, box-shadow .25s ease;
+    }
+    .skill:hover {
+      background: var(--blue); color: #fff;
+      border-color: var(--blue);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(51,93,244,0.28);
+    }
+
+    /* FOOTER */
+    .footer {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 30px 60px; background: #fff; border-top: 1px solid #eee;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-left p { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+    .footer-block { text-align: center; }
+    .footer-label { font-size: 0.78rem; font-weight: 700; margin-bottom: 6px; }
+    .footer-block a { font-size: 0.85rem; color: var(--text); }
+    .footer-block a:hover { color: var(--blue); }
+    .footer-icons { display: flex; gap: 20px; justify-content: center; margin-top: 8px; }
+    .footer-icons a { font-size: 1.6rem; transition: color .2s ease, transform .2s ease; } .footer-icons a:hover { color: var(--blue); transform: translateY(-2px); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .skills-wrap { grid-template-columns: 1fr; padding: 20px 32px 70px; }
+    }
+    @media (max-width: 900px) {
+      .navbar { padding: 18px 24px; }
+      .nav-right {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: #fff; flex-direction: column; gap: 0;
+        padding: 12px 0; border-bottom: 1px solid #eee;
+      }
+      .nav-right.open { display: flex; }
+      .nav-right .nav-link { padding: 14px 24px; }
+      .nav-toggle { display: block; }
+      .page-header { padding: 50px 20px 20px; }
+      .page-header h1 { font-size: 2.3rem; }
+      .footer { padding: 24px; flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 560px) {
+      .skill-grid { grid-template-columns: repeat(2, 1fr); }
+      .category { padding: 22px 18px; border-radius: 14px; }
+      .float-logo { width: 110px; height: 110px; }
+      .float-logo img { width: 70px; height: 70px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-left">
+      <span class="logo-square"><i class="fa-solid fa-user-graduate"></i></span>
+      <span class="logo-name">Sanjay Katta</span>
+    </div>
+    <nav class="nav-right">
+      <a href="index.html" class="nav-link">ABOUT ME</a>
+      <a href="skills.html" class="nav-link active">SKILLS</a>
+      <a href="projects.html" class="nav-link">PROJECTS</a>
+      <a href="certifications.html" class="nav-link">CERTIFICATIONS</a>
+      <a href="problem-solving.html" class="nav-link">PROBLEM SOLVING</a>
+      <a href="resume.html" class="nav-link">RESUME</a>
+      <a href="contact.html" class="nav-link">CONTACT</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <h1>My <span>Skills</span></h1>
+      <p>A toolkit I use to design, build, and ship modern web, mobile, and data-driven applications. Hover any skill — its real logo will pop up right above your cursor.</p>
+    </section>
+
+    <section class="skills-wrap">
+
+      <div class="category">
+        <div class="cat-head">
+          <div class="cat-icon"><i class="fa-solid fa-laptop-code"></i></div>
+          <div>
+            <div class="cat-title">Frontend Development</div>
+            <div class="cat-sub">User Interfaces</div>
+          </div>
+        </div>
+        <div class="skill-grid">
+          <div class="skill" data-img="https://skillicons.dev/icons?i=html">HTML</div>
+          <div class="skill" data-img="https://skillicons.dev/icons?i=css">CSS</div>
+          <div class="skill" data-img="https://skillicons.dev/icons?i=js">JavaScript</div>
+        </div>
+      </div>
+
+      <div class="category">
+        <div class="cat-head">
+          <div class="cat-icon"><i class="fa-solid fa-server"></i></div>
+          <div>
+            <div class="cat-title">Backend Development</div>
+            <div class="cat-sub">APIs & Services</div>
+          </div>
+        </div>
+        <div class="skill-grid">
+          <div class="skill" data-img="https://skillicons.dev/icons?i=python">Python</div>
+          <div class="skill" data-img="https://skillicons.dev/icons?i=fastapi">FastAPI</div>
+          <div class="skill" data-fa="fa-solid fa-plug" data-fa-color="#8b5cf6">REST APIs</div>
+          <div class="skill" data-img="https://cdn.simpleicons.org/sqlalchemy/D71F00">SQLAlchemy</div>
+        </div>
+      </div>
+
+      <div class="category">
+        <div class="cat-head">
+          <div class="cat-icon"><i class="fa-solid fa-database"></i></div>
+          <div>
+            <div class="cat-title">Database</div>
+            <div class="cat-sub">Data Storage</div>
+          </div>
+        </div>
+        <div class="skill-grid">
+          <div class="skill" data-img="https://skillicons.dev/icons?i=mysql">MySQL</div>
+          <div class="skill" data-img="https://skillicons.dev/icons?i=mysql">SQL</div>
+        </div>
+      </div>
+
+      <div class="category">
+        <div class="cat-head">
+          <div class="cat-icon"><i class="fa-solid fa-chart-line"></i></div>
+          <div>
+            <div class="cat-title">Data Analytics</div>
+            <div class="cat-sub">Insights & BI</div>
+          </div>
+        </div>
+        <div class="skill-grid">
+          <div class="skill" data-img="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg">Power BI</div>
+          <div class="skill" data-img="https://img.icons8.com/color/96/microsoft-excel-2019.png">Excel</div>
+          <div class="skill" data-img="https://skillicons.dev/icons?i=mysql">SQL</div>
+          <div class="skill" data-fa="fa-solid fa-chart-column" data-fa-color="#ff7849">Data Viz</div>
+        </div>
+      </div>
+
+      <div class="category">
+        <div class="cat-head">
+          <div class="cat-icon"><i class="fa-solid fa-toolbox"></i></div>
+          <div>
+            <div class="cat-title">Tools & Platforms</div>
+            <div class="cat-sub">Workflow</div>
+          </div>
+        </div>
+        <div class="skill-grid">
+          <div class="skill" data-img="https://skillicons.dev/icons?i=git">Git</div>
+          <div class="skill" data-img="https://skillicons.dev/icons?i=github">GitHub</div>
+          <div class="skill" data-img="https://skillicons.dev/icons?i=vscode">VS Code</div>
+          <div class="skill" data-img="https://cdn.simpleicons.org/expo/000020">Expo</div>
+          <div class="skill" data-img="https://skillicons.dev/icons?i=supabase">Supabase</div>
+          <div class="skill" data-img="https://avatars.githubusercontent.com/u/36424661?s=200&v=4">Render</div>
+          <div class="skill" data-img="https://skillicons.dev/icons?i=vercel">Vercel</div>
+        </div>
+      </div>
+
+      <div class="category">
+        <div class="cat-head">
+          <div class="cat-icon"><i class="fa-solid fa-handshake"></i></div>
+          <div>
+            <div class="cat-title">Soft Skills</div>
+            <div class="cat-sub">Mindset</div>
+          </div>
+        </div>
+        <div class="skill-grid">
+          <div class="skill" data-fa="fa-solid fa-lightbulb" data-fa-color="#eab308">Problem Solving</div>
+          <div class="skill" data-fa="fa-solid fa-comments" data-fa-color="#335df4">Communication</div>
+          <div class="skill" data-fa="fa-solid fa-people-group" data-fa-color="#16a34a">Team Work</div>
+          <div class="skill" data-fa="fa-solid fa-rocket" data-fa-color="#db2777">Quick Learning</div>
+          <div class="skill" data-fa="fa-solid fa-person-chalkboard" data-fa-color="#0ea5e9">Presentation Skills</div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <div class="float-logo" id="floatLogo"></div>
+
+  <footer class="footer"><div class="footer-block">
+      <p class="footer-label">Call</p>
+      <a href="tel:+918978806254">+91 8978806254</a>
+    </div>
+    <div class="footer-block">
+      <p class="footer-label">Write</p>
+      <a href="mailto:kattasanjay31@gmail.com">kattasanjay31@gmail.com</a>
+    </div>
+    <div class="footer-block">
+      <p class="footer-label">Follow</p>
+      <div class="footer-icons">
+        <a href="https://github.com/Sanjaysanjay31" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/sanjay-katta-ba1456323/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:kattasanjay31@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://www.instagram.com/sanjay_31_06_" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const navRight = document.querySelector('.nav-right');
+    if (toggle && navRight) {
+      toggle.addEventListener('click', () => navRight.classList.toggle('open'));
+      navRight.querySelectorAll('.nav-link').forEach(link =>
+        link.addEventListener('click', () => navRight.classList.remove('open'))
+      );
+    }
+
+    const floatLogo = document.getElementById('floatLogo');
+    let activeSkill = null;
+
+    function positionLogo(x, y) {
+      floatLogo.style.left = x + 'px';
+      floatLogo.style.top  = y + 'px';
+    }
+
+    document.querySelectorAll('.skill').forEach(skill => {
+      skill.addEventListener('mouseenter', (e) => {
+        activeSkill = skill;
+        const img = skill.dataset.img;
+        const fa = skill.dataset.fa;
+        if (img) {
+          floatLogo.innerHTML = `<img src="${img}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('i'),{className:'fa-solid fa-cube',style:'font-size:5rem;color:#335df4'}))">`;
+        } else if (fa) {
+          floatLogo.innerHTML = `<i class="${fa}" style="color:${skill.dataset.faColor || '#335df4'}"></i>`;
+        }
+        positionLogo(e.clientX, e.clientY);
+        requestAnimationFrame(() => floatLogo.classList.add('show'));
+      });
+      skill.addEventListener('mousemove', (e) => {
+        if (activeSkill === skill) positionLogo(e.clientX, e.clientY);
+      });
+      skill.addEventListener('mouseleave', () => {
+        activeSkill = null;
+        floatLogo.classList.remove('show');
+      });
+    });
+  </script>
+</body>
+</html>

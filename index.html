@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanjay Katta — Full Stack & Data Analytics Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #335df4;
+      --text: #1c1c1c;
+      --muted: #5a5a5a;
+      --beige: #f1e2d0;
+      --card: #f3ddc5;
+      --bg: #ffffff;
+    }
+    html, body {
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text); background: var(--bg);
+      scroll-behavior: smooth; -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 60px; background: #fff; border-bottom: 1px solid #eee;
+    }
+    .nav-left { display: flex; align-items: center; gap: 12px; }
+    .logo-square { color: #0ea5a4; font-size: 1.2rem; display: inline-flex; align-items: center; flex-shrink: 0; }
+    .logo-name { font-weight: 800; font-size: 1.05rem; }
+    .logo-divider { color: #bbb; }
+    .logo-role { font-size: 0.78rem; letter-spacing: 1.5px; color: var(--muted); font-weight: 500; }
+    .nav-right { display: flex; gap: 32px; }
+    .nav-link { font-size: 0.82rem; letter-spacing: 1.2px; font-weight: 600; color: var(--text); transition: color .2s; }
+    .nav-link:hover { color: var(--blue); }
+    .nav-link.active { color: var(--blue); }
+    .nav-toggle { display: none; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text); }
+
+    /* HERO */
+    .hero {
+      position: relative; display: flex; align-items: center;
+      min-height: calc(100vh - 80px); padding: 60px 0; overflow: hidden;
+    }
+    .beige-bg { position: absolute; top: 0; left: 0; width: 40%; height: 100%; background: var(--beige); z-index: 0; }
+    .light-bg { position: absolute; top: 0; left: 40%; right: 0; height: 100%; background: #eef2fb; z-index: 0; }
+    .hero-inner {
+      position: relative; z-index: 1; display: grid;
+      grid-template-columns: 40% 60%; width: 100%;
+      margin: 0 auto; padding: 0; align-items: center;
+    }
+
+    /* PROFILE CARD */
+    .profile-card {
+      background: var(--card); padding: 40px 36px 0;
+      border-radius: 6px; box-shadow: 0 30px 70px rgba(0,0,0,0.14);
+      text-align: center; overflow: hidden;
+      width: 480px;
+      position: absolute; left: 40%; top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+    .profile-photo {
+      width: 290px; height: 290px; border-radius: 50%;
+      overflow: hidden; margin: 0 auto 28px; background: #d4cabd;
+    }
+    .profile-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .profile-name { font-size: 1.9rem; font-weight: 800; line-height: 1.15; margin-bottom: 16px; white-space: nowrap; }
+    .profile-divider { width: 38px; height: 3px; background: var(--blue); margin: 0 auto 16px; }
+    .profile-role { font-size: 0.72rem; letter-spacing: 2px; color: var(--muted); font-weight: 500; margin-bottom: 28px; }
+    .profile-icons {
+      display: flex; justify-content: center; gap: 28px;
+      background: #fff; margin: 0 -36px; padding: 20px 0;
+    }
+    .profile-icons a { color: var(--text); font-size: 1rem; transition: color .2s, transform .2s; }
+    .profile-icons a:hover { color: var(--blue); transform: translateY(-2px); }
+
+    /* HERO TEXT */
+    .hero-text { grid-column: 2; padding-left: 280px; padding-right: 60px; }
+    .hero-title { font-size: 5rem; font-weight: 800; letter-spacing: -3px; line-height: 1; margin-bottom: 18px; }
+    .hero-subtitle { font-size: 1.4rem; font-weight: 700; margin-bottom: 36px; }
+    .hero-buttons { display: flex; gap: 14px; margin-bottom: 40px; }
+    .btn {
+      display: inline-block; padding: 12px 32px; border-radius: 30px;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 1.5px;
+      transition: all .25s; cursor: pointer;
+    }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-primary:hover { background: #0a35cc; transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--text); }
+    .btn-outline:hover { background: var(--text); color: #fff; }
+    .hero-para { font-size: 0.95rem; line-height: 1.7; color: #333; max-width: 480px; margin-bottom: 16px; }
+
+    /* FOOTER */
+    .footer {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 30px 60px; background: #fff; border-top: 1px solid #eee;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-left p { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+    .footer-block { text-align: center; }
+    .footer-label { font-size: 0.78rem; font-weight: 700; margin-bottom: 6px; }
+    .footer-block a { font-size: 0.85rem; color: var(--text); }
+    .footer-block a:hover { color: var(--blue); }
+    .footer-icons { display: flex; gap: 20px; justify-content: center; margin-top: 8px; }
+    .footer-icons a { font-size: 1.6rem; transition: color .2s ease, transform .2s ease; } .footer-icons a:hover { color: var(--blue); transform: translateY(-2px); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .hero-text { padding-left: 120px; }
+      .hero-title { font-size: 4rem; }
+      .profile-card { width: 420px; }
+      .profile-photo { width: 230px; height: 230px; }
+    }
+    @media (max-width: 900px) {
+      .navbar { padding: 18px 24px; }
+      .logo-role { display: none; }
+      .nav-right {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: #fff; flex-direction: column; gap: 0; padding: 12px 0; border-bottom: 1px solid #eee;
+      }
+      .nav-right.open { display: flex; }
+      .nav-right .nav-link { padding: 14px 24px; }
+      .nav-toggle { display: block; }
+      .hero { padding: 40px 0 80px; }
+      .beige-bg { width: 100%; height: 50%; top: 0; }
+      .light-bg { display: none; }
+      .hero-inner { grid-template-columns: 1fr; padding: 0 24px; gap: 50px; }
+      .profile-card { position: relative; left: auto; top: auto; transform: none; margin: 0 auto; width: 100%; max-width: 360px; }
+      .profile-name { font-size: 1.6rem; }
+      .hero-text { padding-left: 0; }
+      .hero-title { font-size: 3.4rem; }
+      .footer { padding: 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-left">
+      <span class="logo-square"><i class="fa-solid fa-user-graduate"></i></span>
+      <span class="logo-name">Sanjay Katta</span>
+      <span class="logo-divider"></span>
+    </div>
+    <nav class="nav-right">
+      <a href="index.html" class="nav-link active">ABOUT ME</a>
+      <a href="skills.html" class="nav-link">SKILLS</a>
+      <a href="projects.html" class="nav-link">PROJECTS</a>
+      <a href="certifications.html" class="nav-link">CERTIFICATIONS</a>
+      <a href="problem-solving.html" class="nav-link">PROBLEM SOLVING</a>
+      <a href="resume.html" class="nav-link">RESUME</a>
+      <a href="contact.html" class="nav-link">CONTACT</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  </header>
+
+  <main>
+    <section id="about" class="hero">
+      <div class="beige-bg"></div>
+      <div class="light-bg"></div>
+
+      <div class="hero-inner">
+        <div class="profile-card">
+          <div class="profile-photo">
+            <img src="Images/About_Me_At_Mall_1.jpeg" alt="Sanjay Katta" />
+          </div>
+          <h2 class="profile-name">Sanjay Katta</h2>
+          <div class="profile-divider"></div>
+          <p class="profile-role">FULL STACK &amp; DATA ANALYTICS DEVELOPER</p>
+          <div class="profile-icons">
+            <a href="https://github.com/Sanjaysanjay31" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/sanjay-katta-ba1456323/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="mailto:kattasanjay31@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            <a href="tel:+918978806254" aria-label="Phone"><i class="fa-solid fa-phone"></i></a>
+            <a href="https://www.instagram.com/sanjay_31_06_" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="hero-text">
+          <h1 class="hero-title">Hello</h1>
+          <p class="hero-subtitle">Here's who I am &amp; what I do</p>
+          <div class="hero-buttons">
+            <a href="resume.html" class="btn btn-primary">RESUME</a>
+            <a href="projects.html" class="btn btn-outline">PROJECTS</a>
+          </div>
+          <p class="hero-para">
+            I'm a Full Stack &amp; Data Analytics Developer focused on building modern web and mobile applications along with data-driven solutions. I enjoy turning ideas into real-world projects that solve practical problems and improve user experience.
+          </p>
+          <p class="hero-para">
+            I am continuously learning and improving to build impactful digital products.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="footer-block">
+      <p class="footer-label">Call</p>
+      <a href="tel:+918978806254">+91 8978806254</a>
+    </div>
+    <div class="footer-block">
+      <p class="footer-label">Write</p>
+      <a href="mailto:kattasanjay31@gmail.com">kattasanjay31@gmail.com</a>
+    </div>
+    <div class="footer-block">
+      <p class="footer-label">Follow</p>
+      <div class="footer-icons">
+        <a href="https://github.com/Sanjaysanjay31" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/sanjay-katta-ba1456323/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:kattasanjay31@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://www.instagram.com/sanjay_31_06_" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const navRight = document.querySelector('.nav-right');
+    if (toggle && navRight) {
+      toggle.addEventListener('click', () => navRight.classList.toggle('open'));
+      navRight.querySelectorAll('.nav-link').forEach(link =>
+        link.addEventListener('click', () => navRight.classList.remove('open'))
+      );
+    }
+  </script>
+</body>
+</html>
