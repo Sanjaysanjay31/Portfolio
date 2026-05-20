@@ -143,15 +143,25 @@
     }
 
     /* PRINT (Save as PDF) */
+    @page { size: A4; margin: 12mm 12mm; }
     @media print {
       body { background: #fff; }
-      .navbar, .footer, .toolbar { display: none !important; }
+      .navbar, .footer, .toolbar, .print-tip { display: none !important; }
       .resume {
-        box-shadow: none; margin: 0; padding: 26px 32px;
+        box-shadow: none; margin: 0; padding: 0;
         max-width: 100%; border-radius: 0;
       }
       a { color: var(--text) !important; }
+      .section { page-break-inside: avoid; }
     }
+
+    /* PRINT TIP banner */
+    .print-tip {
+      max-width: 880px; margin: 12px auto 0; padding: 10px 16px;
+      background: #fff7d6; border: 1px solid #ecd97a; border-radius: 10px;
+      font-size: 0.8rem; color: #6b5400;
+    }
+    .print-tip b { color: #4a3a00; }
   </style>
 </head>
 <body>
@@ -176,6 +186,9 @@
   <div class="toolbar">
     <button class="tool-btn" onclick="window.print()"><i class="fa-solid fa-download"></i> Download as PDF</button>
   </div>
+  <div class="print-tip">
+    <b>Tip:</b> When the print dialog opens, click <b>"More settings"</b> and uncheck <b>"Headers and footers"</b> to remove the date/title line at the top of each page.
+  </div>
 
   <main class="resume">
 
@@ -188,7 +201,7 @@
           <span><i class="fa-solid fa-envelope"></i><a href="mailto:kattasanjay31@gmail.com">kattasanjay31@gmail.com</a></span>
           <span><i class="fa-brands fa-linkedin"></i><a href="https://www.linkedin.com/in/sanjay-katta-ba1456323/" target="_blank" rel="noopener">linkedin.com/in/sanjay-katta</a></span>
           <span><i class="fa-brands fa-github"></i><a href="https://github.com/Sanjaysanjay31" target="_blank" rel="noopener">github.com/Sanjaysanjay31</a></span>
-          <span><i class="fa-solid fa-globe"></i><a href="#" target="_blank" rel="noopener">sanjaykatta.portfolio.dev</a></span>
+          <span><i class="fa-solid fa-globe"></i><a href="https://sanjay-katta-portfolio.vercel.app/" target="_blank" rel="noopener">sanjay-katta-portfolio.vercel.app</a></span>
         </div>
       </div>
       <div class="resume-photo">
@@ -230,7 +243,7 @@
       <div class="proj-item">
         <div class="row-head">
           <span class="row-title">WorkMithra — Full-Stack Voice-First Mobile App</span>
-          <span class="row-meta"><a href="https://github.com/Sanjaysanjay31/WorkMithra_Project" target="_blank" rel="noopener">github.com/Sanjaysanjay31/WorkMithra_Project</a></span>
+          <span class="row-meta">Link : <a href="https://github.com/Sanjaysanjay31/WorkMithra_Project" target="_blank" rel="noopener">github.com/Sanjaysanjay31/WorkMithra_Project</a></span>
         </div>
         <p class="row-desc">A multilingual mobile app that connects everyday clients with nearby skilled workers using voice commands. Integrated speech-to-text, text-to-speech, and translation to make the booking flow accessible for first-time smartphone users, with map-based discovery and LLM-driven intent detection.</p>
         <div class="tech-inline"><strong>Stack:</strong> React Native, Expo, FastAPI, Render, Supabase, SQLAlchemy, Sarvam AI, OpenStreetMap, Llama 3.1 8B Instruct</div>
@@ -239,7 +252,7 @@
       <div class="proj-item">
         <div class="row-head">
           <span class="row-title">EventConnect — Full-Stack Event Management Platform</span>
-          <span class="row-meta"><a href="https://event-connect-project.vercel.app/" target="_blank" rel="noopener">event-connect-project.vercel.app</a></span>
+          <span class="row-meta">Link : <a href="https://event-connect-project.vercel.app/" target="_blank" rel="noopener">event-connect-project.vercel.app</a></span>
         </div>
         <p class="row-desc">A centralized web platform that helps college organizers create and manage events while letting students discover and register effortlessly. Solves the common gap between event reach and registration logistics with a clean, secure, end-to-end flow.</p>
         <div class="tech-inline"><strong>Stack:</strong> HTML, CSS, JavaScript, FastAPI, Supabase, Vercel, Render</div>
@@ -248,7 +261,7 @@
       <div class="proj-item">
         <div class="row-head">
           <span class="row-title">Sales Dashboard — Power BI Analytics</span>
-          <span class="row-meta"><a href="https://www.linkedin.com/posts/sanjay-katta-ba1456323_newdashboard-powerbi-technicalhub-activity-7271544970891743232-RJvD" target="_blank" rel="noopener">View on LinkedIn</a></span>
+          <span class="row-meta">Link : <a href="https://www.linkedin.com/posts/sanjay-katta-ba1456323_newdashboard-powerbi-technicalhub-activity-7271544970891743232-RJvD" target="_blank" rel="noopener">View on LinkedIn</a></span>
         </div>
         <p class="row-desc">An interactive Power BI dashboard built on a Kaggle sales dataset, surfacing revenue, units sold, and profit trends across years, categories, and regions. Designed with custom DAX measures, drill-downs, and slicers for self-serve business exploration.</p>
         <div class="tech-inline"><strong>Stack:</strong> Power BI, DAX, Data Modeling, Kaggle Dataset</div>
