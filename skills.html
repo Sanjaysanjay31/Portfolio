@@ -25,7 +25,7 @@
       font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       color: var(--text); background: var(--bg);
       scroll-behavior: smooth; -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
+      min-height: 100vh; overflow-x: hidden; max-width: 100%;
     }
     a { text-decoration: none; color: inherit; }
 
@@ -131,6 +131,34 @@
       box-shadow: 0 8px 20px rgba(51,93,244,0.28);
     }
 
+    .category.full-row { grid-column: 1 / -1; }
+    .genai-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .genai-chips .chip {
+      display: inline-flex; align-items: center;
+      padding: 9px 16px; font-size: 0.85rem; font-weight: 600;
+      background: #fff; color: var(--text);
+      border: 1px solid var(--line); border-radius: 999px;
+      transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+      cursor: default;
+    }
+    .genai-chips .chip:hover {
+      background: var(--blue); color: #fff; border-color: var(--blue);
+      transform: translateY(-2px);
+    }
+
+    /* TECH STACK STYLE (grouped rows with chips) */
+    .tech-stack { display: flex; flex-direction: column; gap: 12px; }
+    .tech-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 0.88rem; }
+    .tech-label { font-weight: 700; color: var(--text); min-width: 130px; }
+    .tech-row .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; padding: 6px 12px;
+      background: #fff; border: 1px solid var(--line); border-radius: 999px;
+      font-weight: 600; transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .tech-row .chip:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .tech-row .chip i { font-size: 0.85rem; }
+
     /* FOOTER */
     .footer {
       display: flex; justify-content: space-between; align-items: flex-start;
@@ -217,7 +245,6 @@
 
   <header class="navbar">
     <div class="nav-left">
-      <span class="logo-square"><i class="fa-solid fa-user-graduate"></i></span>
       <span class="logo-name">Sanjay Katta</span>
     </div>
     <nav class="nav-right">
@@ -316,6 +343,7 @@
           <div class="skill" data-img="https://skillicons.dev/icons?i=supabase">Supabase</div>
           <div class="skill" data-img="https://avatars.githubusercontent.com/u/36424661?s=200&v=4">Render</div>
           <div class="skill" data-img="https://skillicons.dev/icons?i=vercel">Vercel</div>
+          <div class="skill" data-fa="fa-brands fa-linux" data-fa-color="#000">Linux Operating System</div>
         </div>
       </div>
 
@@ -333,6 +361,29 @@
           <div class="skill" data-fa="fa-solid fa-people-group" data-fa-color="#16a34a">Team Work</div>
           <div class="skill" data-fa="fa-solid fa-rocket" data-fa-color="#db2777">Quick Learning</div>
           <div class="skill" data-fa="fa-solid fa-person-chalkboard" data-fa-color="#0ea5e9">Presentation Skills</div>
+          <div class="skill" data-fa="fa-solid fa-clock" data-fa-color="#7c3aed">Time Management</div>
+          <div class="skill" data-fa="fa-solid fa-shuffle" data-fa-color="#ef4444">Adaptability</div>
+        </div>
+      </div>
+
+      <div class="category full-row">
+        <div class="cat-head">
+          <div class="cat-icon"><i class="fa-solid fa-robot"></i></div>
+          <div>
+            <div class="cat-title">Applied Generative AI</div>
+            <div class="cat-sub">AI / LLM Apps</div>
+          </div>
+        </div>
+        <div class="genai-chips">
+          <span class="chip">OpenAI API Integration</span>
+          <span class="chip">Gemini API Integration</span>
+          <span class="chip">Prompt Engineering</span>
+          <span class="chip">LLM Integration</span>
+          <span class="chip">AI Chatbot Development</span>
+          <span class="chip">Speech-to-Text Systems</span>
+          <span class="chip">Text-to-Speech Applications</span>
+          <span class="chip">AI Voice Assistants</span>
+          <span class="chip">Real-Time Translation Systems</span>
         </div>
       </div>
 

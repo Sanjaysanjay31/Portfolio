@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sanjay Katta — Full Stack & Data Analyst</title>
+  <title>Sanjay Katta — Full Stack Developer & Data Analyst</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -22,6 +22,7 @@
       font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       color: var(--text); background: var(--bg);
       scroll-behavior: smooth; -webkit-font-smoothing: antialiased;
+      overflow-x: hidden; max-width: 100%;
     }
     a { text-decoration: none; color: inherit; }
 
@@ -127,14 +128,26 @@
       .nav-right.open { display: flex; }
       .nav-right .nav-link { padding: 14px 24px; }
       .nav-toggle { display: block; }
-      .hero { padding: 40px 0 80px; }
-      .beige-bg { width: 100%; height: 50%; top: 0; }
-      .light-bg { display: none; }
-      .hero-inner { grid-template-columns: 1fr; padding: 0 24px; gap: 50px; }
-      .profile-card { position: relative; left: auto; top: auto; transform: none; margin: 0 auto; width: 100%; max-width: 360px; }
-      .profile-name { font-size: 1.6rem; }
-      .hero-text { padding-left: 0; }
-      .hero-title { font-size: 3.4rem; }
+      .hero { padding: 40px 0 80px !important; display: block !important; min-height: auto !important; }
+      .beige-bg { width: 100% !important; height: 50% !important; top: 0 !important; left: 0 !important; }
+      .light-bg { display: none !important; }
+      .hero-inner { display: flex !important; flex-direction: column !important; grid-template-columns: 1fr !important; padding: 0 20px !important; gap: 40px !important; }
+      .profile-card {
+        position: relative !important; left: auto !important; top: auto !important;
+        transform: none !important; margin: 0 auto !important;
+        width: 100% !important; max-width: 340px !important;
+        padding: 32px 28px 0 !important;
+      }
+      .profile-name { font-size: 1.5rem !important; white-space: normal !important; }
+      .profile-photo { width: 200px !important; height: 200px !important; margin-bottom: 22px !important; }
+      .profile-role { font-size: 0.68rem !important; letter-spacing: 1.5px !important; margin-bottom: 22px !important; }
+      .profile-icons { margin: 0 -28px !important; gap: 22px !important; }
+      .hero-subtitle { font-size: 1.05rem !important; margin-bottom: 26px !important; }
+      .hero-para { font-size: 0.9rem !important; max-width: 100% !important; }
+      .hero-waves { height: 70px !important; }
+      .hero-text { padding: 0 !important; width: 100% !important; text-align: left; }
+      .hero-title { font-size: 2.8rem !important; letter-spacing: -1.5px !important; }
+      .hero-buttons { flex-wrap: wrap; }
       .footer { padding: 24px; flex-direction: column; align-items: flex-start; }
     }
 
@@ -179,13 +192,32 @@
       .tech-row { font-size: 0.78rem; }
       .tech-label { min-width: 90px; }
     }
+
+    /* WAVES */
+    .hero-waves {
+      position: absolute; left: 0; right: 0; bottom: -1px;
+      width: 100%; height: 140px; z-index: 1; pointer-events: none;
+      overflow: hidden; line-height: 0;
+    }
+    .hero-waves svg { display: block; width: 200%; height: 100%; }
+    .hero-waves .wave-path {
+      animation: waveMove 9s linear infinite;
+    }
+    .hero-waves .wave-path.slow { animation-duration: 16s; opacity: 0.55; }
+    .hero-waves .wave-path.mid  { animation-duration: 11s; opacity: 0.75; }
+    @keyframes waveMove {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-waves .wave-path { animation: none; }
+    }
   </style>
 </head>
 <body>
 
   <header class="navbar">
     <div class="nav-left">
-      <span class="logo-square"><i class="fa-solid fa-user-graduate"></i></span>
       <span class="logo-name">Sanjay Katta</span>
       <span class="logo-divider"></span>
     </div>
@@ -213,7 +245,7 @@
           </div>
           <h2 class="profile-name">Sanjay Katta</h2>
           <div class="profile-divider"></div>
-          <p class="profile-role">FULL STACK &amp; DATA ANALYST</p>
+          <p class="profile-role">FULL STACK DEVELOPER &amp; DATA ANALYST</p>
           <div class="profile-icons">
             <a href="https://github.com/Sanjaysanjay31" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
             <a href="https://www.linkedin.com/in/sanjay-katta-ba1456323/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -230,13 +262,14 @@
             <a href="projects.html" class="btn btn-outline">PROJECTS</a>
           </div>
           <p class="hero-para">
-            I'm a Full Stack &amp; Data Analyst focused on building modern web and mobile applications along with data-driven solutions. I enjoy turning ideas into real-world projects that solve practical problems and improve user experience.
+            Hey, I'm Sanjay — a 3rd year B.Tech Data Science student at <strong>Aditya University</strong> (2024 – 2028). I work as a <strong>Full Stack AI Developer &amp; Data Analyst</strong>, focused on Applied Generative AI features powered by LLMs and modern AI APIs.
           </p>
           <p class="hero-para">
-            I am continuously learning and improving to build impactful digital products.
+            I love turning real problems into clean, working products — and I'm always learning something new to make the next one sharper than the last.
           </p>
         </div>
       </div>
+
     </section>
   </main>
 
