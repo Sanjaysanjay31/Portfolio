@@ -101,6 +101,9 @@
     .row-title { font-weight: 700; font-size: 0.98rem; }
     .row-meta { font-size: 0.8rem; color: var(--muted); }
     .row-sub { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+    .row-link { font-size: 0.82rem; color: var(--muted); margin-top: 3px; word-break: break-word; }
+    .row-link a { color: var(--blue); }
+    .row-link a:hover { text-decoration: underline; }
     .row-desc { font-size: 0.88rem; line-height: 1.6; margin-top: 6px; color: var(--text); }
 
     .skills-grid { display: grid; grid-template-columns: 160px 1fr; gap: 8px 18px; font-size: 0.88rem; }
@@ -144,7 +147,7 @@
     }
 
     /* PRINT (Save as PDF) */
-    @page { size: A4; margin: 8mm 12mm; }
+    @page { size: A4; margin: 6mm 6mm; }
     @media print {
       body { background: #fff; }
       .navbar, .footer, .toolbar, .print-tip { display: none !important; }
@@ -152,18 +155,27 @@
         box-shadow: none; margin: 0; padding: 0;
         max-width: 100%; border-radius: 0;
       }
-      .resume-head { padding-bottom: 10px !important; margin-bottom: 14px !important; }
+      .resume-head { padding-bottom: 6px !important; margin-bottom: 8px !important; }
       a { color: var(--text) !important; }
-      /* Force desktop layout in print */
       .resume-head { text-align: center !important; }
-      .resume-head .contact-row { justify-content: center !important; }
-      .resume-head h1 { font-size: 2rem !important; }
-      .skills-grid { grid-template-columns: 160px 1fr !important; gap: 6px 18px !important; }
+      .resume-head .contact-row { justify-content: center !important; margin-top: 6px !important; gap: 4px 14px !important; font-size: 0.78rem !important; }
+      .resume-head h1 { font-size: 1.7rem !important; }
+      .resume-head .title { font-size: 0.85rem !important; }
+      .skills-grid { grid-template-columns: 160px 1fr !important; gap: 3px 18px !important; font-size: 0.82rem !important; }
       .skills-grid dt { margin-top: 0 !important; }
-      .section { margin-top: 14px !important; page-break-inside: auto; }
-      .proj-item { page-break-inside: avoid; }
-      .summary { font-size: 0.88rem !important; }
-      .row-desc { font-size: 0.84rem !important; }
+      .section { margin-top: 8px !important; page-break-inside: auto; }
+      .section:last-child { page-break-inside: avoid; }
+      .section h2 { font-size: 0.8rem !important; margin-bottom: 6px !important; padding-bottom: 3px !important; }
+      .proj-item, .edu-item { margin-bottom: 6px !important; page-break-inside: avoid; }
+      .row-link { font-size: 0.76rem !important; margin-top: 1px !important; }
+      .summary { font-size: 0.82rem !important; line-height: 1.5 !important; }
+      .row-title { font-size: 0.9rem !important; }
+      .row-meta { font-size: 0.75rem !important; }
+      .row-sub { font-size: 0.8rem !important; }
+      .row-desc { font-size: 0.8rem !important; line-height: 1.45 !important; margin-top: 3px !important; }
+      .tech-inline { font-size: 0.76rem !important; margin-top: 2px !important; }
+      ul.bullets { margin-top: 2px !important; }
+      ul.bullets li { font-size: 0.82rem !important; line-height: 1.4 !important; margin-bottom: 1px !important; }
     }
 
     /* PRINT TIP banner */
@@ -292,28 +304,22 @@
       <h2>Projects</h2>
 
       <div class="proj-item">
-        <div class="row-head">
-          <span class="row-title">WorkMithra — Full-Stack Voice-First Mobile App</span>
-          <span class="row-meta">Link : <a href="https://github.com/Sanjaysanjay31/WorkMithra_Project" target="_blank" rel="noopener">github.com/Sanjaysanjay31/WorkMithra_Project</a></span>
-        </div>
+        <div class="row-title">WorkMithra — Full-Stack Voice-First Mobile App</div>
+        <div class="row-link">Link : <a href="https://github.com/Sanjaysanjay31/WorkMithra_Project" target="_blank" rel="noopener">github.com/Sanjaysanjay31/WorkMithra_Project</a></div>
         <p class="row-desc">A multilingual mobile app that connects everyday clients with nearby skilled workers using voice commands. Integrated speech-to-text, text-to-speech, and translation to make the booking flow accessible for first-time smartphone users, with map-based discovery and LLM-driven intent detection.</p>
         <div class="tech-inline"><strong>Stack:</strong> Expo, FastAPI, Render, Supabase, SQLAlchemy, Sarvam AI, OpenStreetMap, Llama 3.1 8B Instruct</div>
       </div>
 
       <div class="proj-item">
-        <div class="row-head">
-          <span class="row-title">EventConnect — Full-Stack Event Management Platform</span>
-          <span class="row-meta">Link : <a href="https://event-connect-project.vercel.app/" target="_blank" rel="noopener">event-connect-project.vercel.app</a></span>
-        </div>
+        <div class="row-title">EventConnect — Full-Stack Event Management Platform</div>
+        <div class="row-link">Link : <a href="https://event-connect-project.vercel.app/" target="_blank" rel="noopener">event-connect-project.vercel.app</a></div>
         <p class="row-desc">A centralized web platform that helps college organizers create and manage events while letting students discover and register effortlessly. Solves the common gap between event reach and registration logistics with a clean, secure, end-to-end flow.</p>
         <div class="tech-inline"><strong>Stack:</strong> HTML, CSS, JavaScript, FastAPI, Supabase, Vercel, Render</div>
       </div>
 
       <div class="proj-item">
-        <div class="row-head">
-          <span class="row-title">Sales Dashboard — Power BI Analytics</span>
-          <span class="row-meta">Link : <a href="https://www.linkedin.com/posts/sanjay-katta-ba1456323_newdashboard-powerbi-technicalhub-activity-7271544970891743232-RJvD" target="_blank" rel="noopener">View on LinkedIn</a></span>
-        </div>
+        <div class="row-title">Sales Dashboard — Power BI Analytics</div>
+        <div class="row-link">Link : <a href="https://www.linkedin.com/posts/sanjay-katta-ba1456323_newdashboard-powerbi-technicalhub-activity-7271544970891743232-RJvD" target="_blank" rel="noopener">View on LinkedIn</a></div>
         <p class="row-desc">An interactive Power BI dashboard built on a Kaggle sales dataset, surfacing revenue, units sold, and profit trends across years, categories, and regions. Designed with custom DAX measures, drill-downs, and slicers for self-serve business exploration.</p>
         <div class="tech-inline"><strong>Stack:</strong> Power BI, DAX, Data Modeling, Kaggle Dataset</div>
       </div>
