@@ -20,7 +20,7 @@
       --soft: #b0f09cd8;
     }
     html, body {
-      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       color: var(--text); background: var(--bg);
       scroll-behavior: smooth; -webkit-font-smoothing: antialiased;
       min-height: 100vh; overflow-x: hidden; max-width: 100%;
@@ -43,8 +43,9 @@
 
     /* TOOLBAR */
     .toolbar {
-      max-width: 880px; margin: 16px auto 0; padding: 0 24px;
-      display: flex; justify-content: flex-end; gap: 10px;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
     }
     .tool-btn {
       display: inline-flex; align-items: center; gap: 8px;
@@ -57,13 +58,13 @@
 
     /* RESUME SHEET */
     .resume {
-      max-width: 880px; margin: 12px auto 60px;
+      max-width: 880px; margin: 6px auto 60px;
       background: #fff; border-radius: 16px;
       box-shadow: 0 18px 50px rgba(0,0,0,0.10);
-      padding: 32px 60px 48px;
+      padding: 22px 48px 28px;
     }
     .resume-head {
-      border-bottom: 2px solid var(--blue); padding-bottom: 18px; margin-bottom: 24px;
+      border-bottom: 2px solid var(--blue); padding-bottom: 14px; margin-bottom: 18px;
       text-align: center;
     }
     .resume-head .contact-row { justify-content: center; }
@@ -84,37 +85,67 @@
     .contact-row a:hover { color: var(--blue); }
     .contact-row i { color: var(--blue); margin-right: 6px; }
 
-    .section { margin-top: 26px; }
+    .section { margin-top: 16px; }
     .section h2 {
-      font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--blue); font-weight: 800; margin-bottom: 12px;
-      border-bottom: 1px solid #eee; padding-bottom: 6px;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--blue);
+      font-weight: 700;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 4px;
     }
 
-    .summary { font-size: 0.92rem; line-height: 1.65; color: var(--text); }
+    .summary { font-size: 0.88rem; line-height: 1.45; color: var(--text); }
 
-    .edu-item, .proj-item, .cert-item { margin-bottom: 14px; }
+    .edu-item, .proj-item, .cert-item { margin-bottom: 10px; }
     .row-head {
       display: flex; justify-content: space-between; align-items: baseline;
       flex-wrap: wrap; gap: 6px;
     }
-    .row-title { font-weight: 700; font-size: 0.98rem; }
-    .row-meta { font-size: 0.8rem; color: var(--muted); }
-    .row-sub { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
-    .row-link { font-size: 0.82rem; color: var(--muted); margin-top: 3px; word-break: break-word; }
+    .row-title { font-weight: 700; font-size: 0.95rem; }
+    .row-meta { font-size: 0.76rem; color: var(--muted); }
+    .row-sub { font-size: 0.82rem; color: var(--muted); margin-top: 1px; }
+    .row-link { font-size: 0.78rem; color: var(--muted); margin-top: 2px; word-break: break-word; }
     .row-link a { color: var(--blue); }
     .row-link a:hover { text-decoration: underline; }
-    .row-desc { font-size: 0.88rem; line-height: 1.6; margin-top: 6px; color: var(--text); }
+    .row-desc { font-size: 0.84rem; line-height: 1.45; margin-top: 4px; color: var(--text); }
 
-    .skills-grid { display: grid; grid-template-columns: 160px 1fr; gap: 8px 18px; font-size: 0.88rem; }
-    .skills-grid dt { font-weight: 700; }
-    .skills-grid dd { color: var(--text); }
+    .edu-line {
+      display: flex; justify-content: space-between; align-items: baseline;
+      flex-wrap: wrap; gap: 8px 14px; font-size: 0.88rem; color: var(--text);
+      font-style: italic;
+    }
+    .edu-line .edu-degree { font-weight: 500; }
+    .edu-line .edu-meta { white-space: nowrap; }
+    .edu-line .edu-date { white-space: nowrap; color: var(--muted); }
 
-    .tech-inline { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      gap: 4px 22px;
+      font-size: 0.84rem;
+      align-items: start;
+    }
+    .skills-grid dt {
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.25;
+    }
+    .skills-grid dd {
+      color: var(--text);
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    .tech-inline { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
     .tech-inline strong { color: var(--text); font-weight: 600; }
 
-    ul.bullets { margin: 6px 0 0 18px; }
-    ul.bullets li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 3px; }
+    ul.bullets { margin: 4px 0 0 18px; }
+    ul.bullets li { font-size: 0.84rem; line-height: 1.35; margin-bottom: 1px; }
+    .blue-link { color: var(--blue); text-decoration: underline; }
+    .blue-link:hover { text-decoration: none; }
 
     /* FOOTER */
     .footer {
@@ -129,6 +160,19 @@
     .footer-icons { display: flex; gap: 20px; justify-content: center; margin-top: 8px; }
     .footer-icons a { font-size: 1.6rem; transition: color .2s ease, transform .2s ease; } .footer-icons a:hover { color: var(--blue); transform: translateY(-2px); }
 
+    /* Prevent navbar overflow on medium screens */
+    @media (max-width: 1180px) {
+      .navbar { padding: 18px 24px; }
+      .nav-right {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: #fff; flex-direction: column; gap: 0;
+        padding: 12px 0; border-bottom: 1px solid #eee;
+      }
+      .nav-right.open { display: flex; }
+      .nav-right .nav-link { padding: 14px 24px; }
+      .nav-toggle { display: block; }
+    }
+
     @media (max-width: 900px) {
       .navbar { padding: 18px 24px; }
       .nav-right {
@@ -139,7 +183,7 @@
       .nav-right.open { display: flex; }
       .nav-right .nav-link { padding: 14px 24px; }
       .nav-toggle { display: block; }
-      .resume { padding: 36px 28px; margin: 14px 16px 60px; }
+      .resume { padding: 24px 20px; margin: 12px 12px 44px; }
       .resume-head h1 { font-size: 1.8rem; }
       .skills-grid { grid-template-columns: 1fr; gap: 2px 0; }
       .skills-grid dt { margin-top: 8px; }
@@ -147,42 +191,43 @@
     }
 
     /* PRINT (Save as PDF) */
-    @page { size: A4; margin: 6mm 6mm; }
+    @page { size: A4; margin: 4mm 12mm; }
+    
     @media print {
-      body { background: #fff; }
+      body { background: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+      }
       .navbar, .footer, .toolbar, .print-tip { display: none !important; }
       .resume {
-        box-shadow: none; margin: 0; padding: 0;
+        box-shadow: none; margin: 0; padding: 0 !important;
         max-width: 100%; border-radius: 0;
       }
-      .resume-head { padding-bottom: 6px !important; margin-bottom: 8px !important; }
+      .resume-head { padding-bottom: 4px !important; margin-bottom: 8px !important; }
       a { color: var(--text) !important; }
       .resume-head { text-align: center !important; }
-      .resume-head .contact-row { justify-content: center !important; margin-top: 6px !important; gap: 4px 14px !important; font-size: 0.78rem !important; }
-      .resume-head h1 { font-size: 1.7rem !important; }
-      .resume-head .title { font-size: 0.85rem !important; }
-      .skills-grid { grid-template-columns: 160px 1fr !important; gap: 3px 18px !important; font-size: 0.82rem !important; }
+      .resume-head .contact-row { justify-content: center !important; margin-top: 4px !important; gap: 4px 12px !important; font-size: 0.74rem !important; }
+      .resume-head h1 { font-size: 1.55rem !important; }
+      .resume-head .title { font-size: 0.78rem !important; }
+      .skills-grid { grid-template-columns: 145px 1fr !important; gap: 2px 12px !important; font-size: 0.78rem !important; }
       .skills-grid dt { margin-top: 0 !important; }
-      .section { margin-top: 8px !important; page-break-inside: auto; }
+      .section { margin-top: 6px !important; page-break-inside: auto; }
       .section:last-child { page-break-inside: avoid; }
-      .section h2 { font-size: 0.8rem !important; margin-bottom: 6px !important; padding-bottom: 3px !important; }
-      .proj-item, .edu-item { margin-bottom: 6px !important; page-break-inside: avoid; }
-      .row-link { font-size: 0.76rem !important; margin-top: 1px !important; }
-      .summary { font-size: 0.82rem !important; line-height: 1.5 !important; }
+      .section h2 { font-size: 0.78rem !important; margin-bottom: 4px !important; padding-bottom: 2px !important; }
+      .proj-item, .edu-item { margin-bottom: 4px !important; page-break-inside: avoid; }
+      .row-link { font-size: 0.72rem !important; margin-top: 0 !important; }
+      .summary { font-size: 0.76rem !important; line-height: 1.32 !important; }
       .row-title { font-size: 0.9rem !important; }
-      .row-meta { font-size: 0.75rem !important; }
-      .row-sub { font-size: 0.8rem !important; }
-      .row-desc { font-size: 0.8rem !important; line-height: 1.45 !important; margin-top: 3px !important; }
-      .tech-inline { font-size: 0.76rem !important; margin-top: 2px !important; }
-      ul.bullets { margin-top: 2px !important; }
-      ul.bullets li { font-size: 0.82rem !important; line-height: 1.4 !important; margin-bottom: 1px !important; }
+      .row-meta { font-size: 0.72rem !important; }
+      .row-sub { font-size: 0.78rem !important; }
+      .row-desc { font-size: 0.76rem !important; line-height: 1.32 !important; margin-top: 2px !important; }
+      .tech-inline { font-size: 0.74rem !important; margin-top: 2px !important; }
+      ul.bullets { margin-top: 1px !important; }
+      ul.bullets li { font-size: 0.76rem !important; line-height: 1.28 !important; margin-bottom: 1px !important; }
     }
 
     /* PRINT TIP banner */
     .print-tip {
-      max-width: 880px; margin: 12px auto 0; padding: 10px 16px;
-      background: #fff7d6; border: 1px solid #ecd97a; border-radius: 10px;
-      font-size: 0.8rem; color: #6b5400;
+      display: none;
     }
     .print-tip b { color: #4a3a00; }
 
@@ -248,10 +293,9 @@
   </header>
 
   <div class="toolbar">
-    <button class="tool-btn" onclick="window.print()"><i class="fa-solid fa-download"></i> Download as PDF</button>
-  </div>
-  <div class="print-tip">
-    <b>Tip:</b> When the print dialog opens, click <b>"More settings"</b> and uncheck <b>"Headers and footers"</b> to remove the date/title line at the top of each page.
+  <button class="tool-btn" onclick="window.print()">
+    <i class="fa-solid fa-print"></i> Save as PDF
+  </button>
   </div>
 
   <main class="resume">
@@ -259,80 +303,117 @@
     <header class="resume-head">
       <div class="resume-head-text">
         <h1>Sanjay Katta</h1>
-        <div class="title">Aspiring Full-Stack Developer &amp; Data Science Student</div>
+        <div class="title">Full-Stack Developer | Data Science Undergraduate</div>
         <div class="contact-row">
           <span><i class="fa-solid fa-phone"></i><a href="tel:+918978806254">+91 8978806254</a></span>
-          <span><i class="fa-solid fa-envelope" style="color:#ea4335;"></i><a href="mailto:kattasanjay31@gmail.com">Gmail</a></span>
-          <span><i class="fa-brands fa-linkedin" style="color:#0a66c2;"></i><a href="https://www.linkedin.com/in/sanjay-katta-ba1456323/" target="_blank" rel="noopener">LinkedIn</a></span>
-          <span><i class="fa-brands fa-github" style="color:#181717;"></i><a href="https://github.com/Sanjaysanjay31" target="_blank" rel="noopener">GitHub</a></span>
-          <span><i class="fa-solid fa-globe" style="color:#2563eb;"></i><a href="https://sanjay-katta-portfolio.vercel.app/" target="_blank" rel="noopener">Portfolio</a></span>
+          <span><i class="fa-solid fa-location-dot"></i>Surampalem, Andhra Pradesh, India</span>
+          <span><i class="fa-solid fa-envelope" style="color:#ea4335;"></i><a href="mailto:kattasanjay31@gmail.com">kattasanjay31@gmail.com</a></span>
+          <span><i class="fa-brands fa-linkedin" style="color:#0a66c2;"></i><a href="https://www.linkedin.com/in/sanjay-katta-ba1456323/" target="_blank" rel="noopener">linkedin.com/in/sanjay-katta-ba1456323</a></span>
+          <span><i class="fa-brands fa-github" style="color:#181717;"></i><a href="https://github.com/Sanjaysanjay31" target="_blank" rel="noopener">github.com/Sanjaysanjay31</a></span>
+          <span><i class="fa-solid fa-globe" style="color:#2563eb;"></i><a href="https://sanjay-katta-portfolio.vercel.app/" target="_blank" rel="noopener">sanjay-katta-portfolio.vercel.app</a></span>
         </div>
       </div>
     </header>
 
     <section class="section">
-      <h2>Summary</h2>
-      <p class="summary">B.Tech Data Science student passionate about building practical, user-facing software — from full-stack web apps to AI-powered mobile experiences and BI dashboards. Comfortable across the stack with Python/FastAPI on the backend, HTML/CSS/JavaScript on the frontend, and SQL/Supabase for data. Quick learner who enjoys turning real problems into clean, working products.</p>
+      <h2>Professional Summary</h2>
+      <p class="summary">A Bachelor of Technology (B.Tech) student in Computer Science and Engineering (Data Science) with hands-on full-stack development experience at Technical Hub Pvt Ltd. Skilled in HTML, CSS, JavaScript, Python, FastAPI, SQL, Supabase, and Git. Focused on building responsive web applications, integrating APIs, and supporting end-to-end delivery.</p>
+    </section>
+
+    <section class="section">
+      <h2>Experience</h2>
+      <div class="proj-item">
+        <div class="row-head">
+          <span class="row-title">Technical Hub Pvt Ltd</span>
+          <span class="row-meta">May 2026 – June 2026</span>
+        </div>
+        <div class="row-sub">Full-Stack Development Intern</div>
+        <div class="row-link">Intern ID: THSI260721</div>
+        <ul class="bullets">
+          <li>Completed a seven-week full-stack development internship across four work areas: front-end, back-end, API, and database development.</li>
+          <li>Delivered updates across 3 core activities: feature implementation, debugging, and code maintenance.</li>
+          <li>Applied 8 technologies in day-to-day work: HTML, CSS, JavaScript, Python, FastAPI, SQL, Supabase, and Git.</li>
+        </ul>
+      </div>
     </section>
 
     <section class="section">
       <h2>Education</h2>
       <div class="edu-item">
         <div class="row-head">
-          <span class="row-title">Aditya University, Surampalem, India</span>
-          <span class="row-meta">2024 – 2028</span>
+          <span class="row-title">Aditya University</span>
+          <span class="row-meta">Surampalem, Andhra Pradesh, India</span>
         </div>
-        <div class="row-sub">B.Tech in Computer Science and Engineering (Data Science) — 3rd Year Undergraduate</div>
+        <div class="edu-line">
+          <span class="edu-degree">B.Tech in Computer Science and Engineering (Data Science)</span>
+          <span class="edu-meta">CGPA: 8.13/10</span>
+          <span class="edu-date">2024 – 2028</span>
+        </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section skills-section">
       <h2>Technical Skills</h2>
       <dl class="skills-grid">
         <dt>Programming Languages</dt><dd>C, C++, Python</dd>
         <dt>Frontend</dt><dd>HTML, CSS, JavaScript</dd>
-        <dt>Backend</dt><dd>Python, FastAPI, REST APIs, SQLAlchemy</dd>
+        <dt>Backend</dt><dd>Python, FastAPI, REST APIs, SQLAlchemy, PostgreSQL</dd>
         <dt>Databases</dt><dd>MySQL, Supabase</dd>
         <dt>Data &amp; BI</dt><dd>Power BI, DAX, Excel, Data Visualization</dd>
         <dt>Applied Generative AI</dt><dd>LLM Integration, AI Integration, OpenAI/Gemini APIs</dd>
-        <dt>Tools &amp; Cloud</dt><dd>Git, GitHub, VS Code, Expo, Vercel, Render, Google Colab, Linux Operating System</dd>
-        <dt>Soft Skills</dt><dd>Problem Solving, Communication, Team Work, Quick Learning, Presentation, Time Management, Adaptability</dd>
+        <dt>Tools &amp; Cloud</dt><dd>Git, GitHub, VS Code, Expo, Vercel, Render, Google Colab, Linux</dd>
+        <dt>Soft Skills</dt><dd>Problem Solving, Communication, Teamwork, Quick Learner, Presentation, Time Management, Adaptability</dd>
       </dl>
+    </section>
+
+    <section class="section">
+      <h2>Achievements</h2>
+      <ul class="bullets">
+        <li>Solved 1200+ coding problems across LeetCode, CodeChef, HackerRank, and GeeksforGeeks.</li>
+        <li><strong>Coding Profiles:</strong> 
+          <a class="blue-link" href="https://leetcode.com/u/Sanjay31_/" target="_blank" rel="noopener">LeetCode</a> | 
+          <a class="blue-link" href="https://www.codechef.com/users/sanjaysanjay31" target="_blank" rel="noopener">CodeChef</a> | 
+          <a class="blue-link" href="https://www.geeksforgeeks.org/user/kattasad281/" target="_blank" rel="noopener">GeeksforGeeks</a> | 
+          <a class="blue-link" href="https://www.hackerrank.com/profile/24b11ds095" target="_blank" rel="noopener">HackerRank</a>
+        </li>
+        <li>Strong foundation in Data Structures & Algorithms, Competitive Programming, and Problem-Solving.</li>
+      </ul>
     </section>
 
     <section class="section">
       <h2>Projects</h2>
 
       <div class="proj-item">
-        <div class="row-title">WorkMithra — Full-Stack Voice-First Mobile App</div>
-        <div class="row-link">Link : <a href="https://github.com/Sanjaysanjay31/WorkMithra_Project" target="_blank" rel="noopener">github.com/Sanjaysanjay31/WorkMithra_Project</a></div>
-        <p class="row-desc">A multilingual mobile app that connects everyday clients with nearby skilled workers using voice commands. Integrated speech-to-text, text-to-speech, and translation to make the booking flow accessible for first-time smartphone users, with map-based discovery and LLM-driven intent detection.</p>
+        <div class="row-title">WorkMithra — AI-Powered Multilingual Service Platform</div>
+        <div class="row-link">Link: <a href="https://github.com/Sanjaysanjay31/WorkMithra_Project" target="_blank" rel="noopener">github.com/Sanjaysanjay31/WorkMithra_Project</a></div>
+        <p class="row-desc">A multilingual mobile app that connects users with nearby skilled workers using voice commands. Integrated 5 key capabilities: speech-to-text, text-to-speech, translation, map-based discovery, and LLM-driven intent detection to make the booking process accessible for first-time smartphone users.</p>
+        <div class="tech-inline"><strong>Impact:</strong> Improved accessibility and multilingual support for mobile booking.</div>
         <div class="tech-inline"><strong>Stack:</strong> Expo, FastAPI, Render, Supabase, SQLAlchemy, Sarvam AI, OpenStreetMap, Llama 3.1 8B Instruct</div>
       </div>
 
       <div class="proj-item">
         <div class="row-title">EventConnect — Full-Stack Event Management Platform</div>
-        <div class="row-link">Link : <a href="https://event-connect-project.vercel.app/" target="_blank" rel="noopener">event-connect-project.vercel.app</a></div>
-        <p class="row-desc">A centralized web platform that helps college organizers create and manage events while letting students discover and register effortlessly. Solves the common gap between event reach and registration logistics with a clean, secure, end-to-end flow.</p>
+        <div class="row-link">Link: <a href="https://event-connect-project.vercel.app/" target="_blank" rel="noopener">event-connect-project.vercel.app</a></div>
+        <p class="row-desc">Implemented 2 primary workflows, event creation and registration, in a clean end-to-end web platform.</p>
+        <div class="tech-inline"><strong>Impact:</strong> Streamlined event discovery and registration into one flow.</div>
         <div class="tech-inline"><strong>Stack:</strong> HTML, CSS, JavaScript, FastAPI, Supabase, Vercel, Render</div>
       </div>
 
       <div class="proj-item">
         <div class="row-title">Sales Dashboard — Power BI Analytics</div>
-        <div class="row-link">Link : <a href="https://www.linkedin.com/posts/sanjay-katta-ba1456323_newdashboard-powerbi-technicalhub-activity-7271544970891743232-RJvD" target="_blank" rel="noopener">View on LinkedIn</a></div>
-        <p class="row-desc">An interactive Power BI dashboard built on a Kaggle sales dataset, surfacing revenue, units sold, and profit trends across years, categories, and regions. Designed with custom DAX measures, drill-downs, and slicers for self-serve business exploration.</p>
-        <div class="tech-inline"><strong>Stack:</strong> Power BI, DAX, Data Modeling, Kaggle Dataset</div>
+        <div class="row-link">Link: <a href="https://www.linkedin.com/posts/sanjay-katta-ba1456323_newdashboard-powerbi-technicalhub-activity-7271544970891743232-RJvD" target="_blank" rel="noopener">linkedin.com/posts/sanjay-katta-ba1456323/newdashboard-powerbi-technicalhub-activity-7271544970891743232-RJvD</a></div>
+        <p class="row-desc">Developed an interactive dashboard for sales analysis across categories, regions, and time periods. </p>
+        <div class="tech-inline"><strong>Impact:</strong> Improved reporting and sales trend analysis through dynamic visualizations. </div>
+        <div class="tech-inline"><strong>Stack:</strong> Power BI, DAX, Power Query, Data Modeling, Kaggle Dataset</div>
       </div>
     </section>
 
     <section class="section">
       <h2>Certifications</h2>
       <ul class="bullets">
-        <li><strong>HackerRank</strong> — Problem Solving (Feb 2026)</li>
-        <li><strong>HackerRank</strong> — SQL (Nov 2025)</li>
-        <li><strong>Cisco</strong> — C++ Programming (Jan 2026)</li>
-        <li><strong>Microsoft</strong> — Power BI (May 2025)</li>
-        <li><strong>Microsoft</strong> — Excel (Nov 2024)</li>
+        <li><strong>Cisco</strong> — C++ Programming</li>
+        <li><strong>Microsoft</strong> — Power BI</li>
+        <li><strong>Microsoft</strong> — Excel</li>
       </ul>
     </section>
 
@@ -367,5 +448,6 @@
       );
     }
   </script>
+  
 </body>
 </html>
